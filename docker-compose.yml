@@ -1,0 +1,194 @@
+# =============================================================================
+# docker-compose.yml
+# Physics-Constrained Fake Base Station Detection — ns-3 Simulation Pipeline
+#
+# Multiple independent services sharing the same parameters but testing
+# different FBS positions relative to the impersonated legal cell (ECI=1
+# at position (0, 0) in a 5×5 grid with ISD=500 m).
+#
+# All services write to subdirectories of ./results/:
+#   results/fbs-zero/        FBS at (0, 0)             — dist =    0 m (colocated with LBS)
+#   results/fbs-close/       FBS at (70.7, 70.7)       — dist =  100 m
+#   results/fbs-close2/      FBS at (141.4, 141.4)     — dist =  200 m
+#   results/fbs-medium/      FBS at (353.5, 353.5)     — dist ≈  500 m
+#   results/fbs-far/         FBS at (707.1, 707.1)     — dist ≈ 1000 m
+#   results/fbs-veryfar/     FBS at (1400, 1000)       — dist ≈ 1721 m
+#   results/fbs-edge/        FBS at (1900, 1800)       — dist ≈ 2614 m (near grid edge)
+#
+# Usage:
+#   docker compose up                         # all containers in parallel
+#   docker compose up sim-fbs-far             # single container
+#   docker compose up sim-fbs-close sim-fbs-medium   # two containers
+# =============================================================================
+
+version: "3.9"
+
+# ---------------------------------------------------------------------------
+# Base service template — shared by all simulation containers
+# ---------------------------------------------------------------------------
+x-sim-base: &sim-base
+  image: ns3-fakebs:latest
+  build:
+    context: .
+    dockerfile: Dockerfile
+  environment:
+    - NS_LOG=FakeBsSimulation=info
+  restart: "no"
+  volumes:
+    - ./run.sh:/run.sh:ro
+    - ./scratch/fake-bs-sim.cc:/src/fake-bs-sim.cc:ro
+    - ./scratch/ccpcv-detector.h:/src/ccpcv-detector.h:ro
+    - ./scratch/ccpcv-detector.cc:/src/ccpcv-detector.cc:ro
+    - ./scratch/sim-logger.h:/src/sim-logger.h:ro
+    - ./detector:/detector:ro
+    # Single parent mount — each service writes to its own subdirectory
+    # via --outputDir=/output/<name>
+    - ./results:/output
+  entrypoint: [ "/bin/bash", "/run.sh" ]
+
+# ---------------------------------------------------------------------------
+# Services
+# ---------------------------------------------------------------------------
+services:
+
+  # ---- Build image only (no simulation) ------------------------------------
+  build-image:
+    <<: *sim-base
+    entrypoint: [ "echo", "Image built successfully" ]
+
+  # ── FBS colocated with LBS: (0, 0)  dist = 0 m ────────────────────────────
+  # Baseline/degenerate case: FBS at exact same position as impersonated cell.
+  # Geometrically indistinguishable — expected lowest detection score.
+  sim-fbs-zero:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=0"
+      - "--fakePosY=0"
+      - "--txPower=46"
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-zero"
+
+  # ── FBS close to LBS: (70.7, 70.7)  dist = 100 m ──────────────────────────
+  sim-fbs-close:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=70.7"
+      - "--fakePosY=70.7"
+      - "--txPower=46"
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-close"
+
+  # ── FBS close to LBS: (141.4, 141.4)  dist = 200 m ────────────────────────
+  sim-fbs-close2:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=141.4"
+      - "--fakePosY=141.4"
+      - "--txPower=46"
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-close2"
+
+  # ── FBS medium distance: (353.5, 353.5)  dist ≈ 500 m ─────────────────────
+  sim-fbs-medium:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=353.5"
+      - "--fakePosY=353.5"
+      - "--txPower=46"
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-medium"
+
+  # ── FBS far from LBS: (707.1, 707.1)  dist ≈ 1000 m ───────────────────────
+  sim-fbs-far:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=707.1"
+      - "--fakePosY=707.1"
+      - "--txPower=46"
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-far"
+
+  # ── FBS very far: (1400, 1000)  dist ≈ 1721 m ─────────────────────────────
+  sim-fbs-veryfar:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=1400"
+      - "--fakePosY=1000"
+      - "--txPower=46"
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-veryfar"
+
+  # ── FBS near grid edge: (1900, 1800)  dist ≈ 2614 m ───────────────────────
+  # Easiest case: FBS far from impersonated cell, near opposite corner.
+  # Strong geometric inconsistency → high detection score.
+  sim-fbs-edge:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=1900"
+      - "--fakePosY=1800"
+      - "--txPower=46"
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-edge"
