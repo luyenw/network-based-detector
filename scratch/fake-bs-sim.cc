@@ -25,7 +25,8 @@
  * Outputs (outputDir/):
  *   simulation.log      — full structured log (DEBUG level)
  *   measurements.csv    — time_sec, imsi, ue_x, ue_y, ecgi,
- *                         cell_role (S/N), rsrp_dbm, timing_advance
+ *                         cell_role (S/N), rsrp_dbm, rsrq_db, snr_db,
+ *                         timing_advance
  *   cell_database.csv   — all cells: ecgi, pos_x, pos_y, tx_power_dbm, is_fake
  *   legal_cell_map.csv  — legal cells only: ecgi, pos_x, pos_y, tx_power_dbm
  *   ccpcv_results.csv   — time_sec, ecgi, residual, status
@@ -92,6 +93,13 @@ static std::normal_distribution<double> g_shadowDist{0.0, 1.0};
 // Maximum number of cells per UE measurement report (models 3GPP maxReportCells IE).
 // In real LTE, UE reports at most N strongest cells. 0 = no limit (report all).
 static uint32_t           g_maxReportCells = 5;
+
+// RSRQ / SNR helper parameters.
+// We approximate RSSI as the sum of visible-cell powers plus thermal noise over
+// the configured LTE bandwidth, and SNR as signal / (interference + noise).
+static double             g_noiseFigureDb = 5.0;
+static double             g_rsrqNoiseStdDb = 2.0;
+static double             g_snrNoiseStdDb  = 3.0;
 
 // =============================================================================
 // MeasReportConfig — models the RRC Measurement Configuration sent by eNB
@@ -235,6 +243,8 @@ struct MeasurementRecord
     EcgiT    ecgi;
     bool     isServing;
     double   rsrpDbm;
+    double   rsrqDb;
+    double   snrDb;
     int      timingAdvance;
 };
 
@@ -261,7 +271,7 @@ public:
         }
         // cell_id: unique ns-3 cell ID (fake and legal have different cell_id even with same ECGI)
         // ecgi column included per MeasReportConfig.cellIdReporting = true
-        m_ofs << "time_sec,imsi,ue_x,ue_y,ue_z,cell_id,ecgi,cell_role,rsrp_dbm,timing_advance\n";
+        m_ofs << "time_sec,imsi,ue_x,ue_y,ue_z,cell_id,ecgi,cell_role,rsrp_dbm,rsrq_db,snr_db,timing_advance\n";
         SIM_LOG(INFO, "MeasureColl", "Measurements CSV opened: " << path);
     }
 
@@ -275,7 +285,7 @@ public:
                     "Cannot open fake_served_ues CSV: " << path);
             return;
         }
-        m_fakeOfs << "time_sec,imsi,ue_x,ue_y,ue_z,serving_ecgi,rsrp_dbm,timing_advance\n";
+        m_fakeOfs << "time_sec,imsi,ue_x,ue_y,ue_z,serving_ecgi,rsrp_dbm,rsrq_db,snr_db,timing_advance\n";
         SIM_LOG(INFO, "MeasureColl", "Fake-served UEs CSV opened: " << path);
     }
 
@@ -292,6 +302,8 @@ public:
               << EcgiToStr(rec.ecgi)         << ","
               << (rec.isServing ? "S" : "N") << ","
               << rec.rsrpDbm                 << ","
+              << rec.rsrqDb                  << ","
+              << rec.snrDb                   << ","
               << rec.timingAdvance           << "\n";
         m_ofs.flush();
     }
@@ -299,7 +311,7 @@ public:
     // Write one row for a UE currently camped on the fake BS
     void AddFakeServed(double timeSec, uint64_t imsi,
                        double ueX, double ueY, double ueZ,
-                       EcgiT servEcgi, double rsrpDbm, int ta)
+                       EcgiT servEcgi, double rsrpDbm, double rsrqDb, double snrDb, int ta)
     {
         if (!m_fakeOfs.is_open()) return;
         m_fakeOfs << std::fixed << std::setprecision(3)
@@ -310,6 +322,8 @@ public:
                   << ueZ                  << ","
                   << EcgiToStr(servEcgi)  << ","
                   << rsrpDbm              << ","
+                  << rsrqDb               << ","
+                  << snrDb                << ","
                   << ta                   << "\n";
         m_fakeOfs.flush();
     }
@@ -336,14 +350,43 @@ static std::map<uint32_t, UeInfo> g_ueByNodeId;
 static std::string g_outputDir;
 static double      g_txPowerDbm     = 46.0;
 static double      g_fakeTxPowerDbm = 46.0;  // FBS TX power (may differ from LBS)
+static uint32_t    g_bandwidthRbs   = 25;
 
 static CcpcvDetector g_ccpcvDetector;
+
+static double
+DbmToMilliwatt(double dbm)
+{
+    return std::pow(10.0, dbm / 10.0);
+}
+
+static double
+MilliwattToDb(double mw)
+{
+    return 10.0 * std::log10(std::max(mw, 1e-12));
+}
+
+static double
+ComputeNoisePowerMw(uint32_t bandwidthRbs)
+{
+    const double hzPerRb = 180000.0;
+    double bandwidthHz = std::max(1.0, hzPerRb * static_cast<double>(bandwidthRbs));
+    double noiseDbm = -174.0 + 10.0 * std::log10(bandwidthHz) + g_noiseFigureDb;
+    return DbmToMilliwatt(noiseDbm);
+}
+
+static double
+ClampDb(double value, double minValue, double maxValue)
+{
+    return std::max(minValue, std::min(maxValue, value));
+}
 
 // =============================================================================
 // PeriodicMeasure — generates UE measurement reports as configured by eNB
 //
 // Models LTE periodic measurement reporting (reportInterval from eNB config):
 //   - UE measures RSRP from every visible cell
+//   - RSRQ/SNR are derived from the visible-cell powers plus thermal noise
 //   - Cells identified by ECGI (cellIdReporting = true per MeasReportConfig)
 //   - When fake and legal share an ECGI, UE reports the stronger signal
 //   - Serving ECGI = ECGI with highest RSRP
@@ -376,7 +419,15 @@ PeriodicMeasure()
         // --- Aggregate RSRP + TA per ECGI (max RSRP wins on ECGI collision) ---
         // When fake and legal share an ECGI, the UE sees the stronger signal,
         // which is what it would report in a real measurement report.
-        struct EcgiMeas { double rsrp; int ta; bool fromFake; uint16_t cellId; };
+        struct EcgiMeas
+        {
+            double rsrp;
+            double rsrq;
+            double snr;
+            int ta;
+            bool fromFake;
+            uint16_t cellId;
+        };
         std::map<EcgiT, EcgiMeas> ecgiMeas;
 
         for (const auto& cv : cells)
@@ -396,7 +447,7 @@ PeriodicMeasure()
 
             auto it = ecgiMeas.find(cr.ecgi);
             if (it == ecgiMeas.end() || rsrp > it->second.rsrp)
-                ecgiMeas[cr.ecgi] = {rsrp, ta, cr.isFake, cr.cellId};
+                ecgiMeas[cr.ecgi] = {rsrp, 0.0, 0.0, ta, cr.isFake, cr.cellId};
         }
 
         // --- Trim to top-N cells by RSRP (models 3GPP maxReportCells) ---
@@ -425,6 +476,32 @@ PeriodicMeasure()
                     << g_maxReportCells << ")");
 
             ecgiMeas = trimmed;
+        }
+
+        // --- Derive RSRQ and SNR from visible-cell powers ---
+        // RSSI ≈ sum of all reported-cell powers + thermal noise over DL bandwidth.
+        double effectiveBandwidthRbs = std::max(1u, g_bandwidthRbs);
+        double noiseMw = ComputeNoisePowerMw(static_cast<uint32_t>(effectiveBandwidthRbs));
+        double totalRxMw = noiseMw;
+        for (const auto& em : ecgiMeas)
+            totalRxMw += DbmToMilliwatt(em.second.rsrp);
+
+        for (auto& em : ecgiMeas)
+        {
+            double signalMw = DbmToMilliwatt(em.second.rsrp);
+            double interferencePlusNoiseMw = std::max(totalRxMw - signalMw, noiseMw);
+            double rsrqDb = MilliwattToDb(
+                (effectiveBandwidthRbs * signalMw) / std::max(totalRxMw, 1e-12)
+            );
+            double snrDb = MilliwattToDb(signalMw / interferencePlusNoiseMw);
+
+            if (g_rsrqNoiseStdDb > 0.0)
+                rsrqDb += g_rsrqNoiseStdDb * g_shadowDist(g_shadowRng);
+            if (g_snrNoiseStdDb > 0.0)
+                snrDb += g_snrNoiseStdDb * g_shadowDist(g_shadowRng);
+
+            em.second.rsrq = ClampDb(rsrqDb, -40.0, 20.0);
+            em.second.snr  = ClampDb(snrDb, -40.0, 40.0);
         }
 
         // --- Log ECGI collision: fake signal stronger than legal ---
@@ -465,7 +542,7 @@ PeriodicMeasure()
         {
             const EcgiMeas& em = ecgiMeas[servEcgi];
             GlobalMeasurementCollector::Instance().AddFakeServed(
-                now, imsi, ueX, ueY, ueZ, servEcgi, em.rsrp, em.ta);
+                now, imsi, ueX, ueY, ueZ, servEcgi, em.rsrp, em.rsrq, em.snr, em.ta);
             SIM_LOG(DEBUG, "PeriodicMeas",
                     "t=" << std::fixed << std::setprecision(2) << now << "s"
                     << " IMSI=" << imsi
@@ -489,6 +566,8 @@ PeriodicMeasure()
             rec.ecgi          = em.first;
             rec.isServing     = (em.first == servEcgi);
             rec.rsrpDbm       = em.second.rsrp;
+            rec.rsrqDb        = em.second.rsrq;
+            rec.snrDb         = em.second.snr;
             rec.timingAdvance = em.second.ta;
             GlobalMeasurementCollector::Instance().AddMeasurement(rec);
         }
@@ -542,6 +621,8 @@ main(int argc, char* argv[])
     double      txPowerDbm          = 46.0;
     double      fakeTxPowerDbm      = -1.0;   // <0 = same as txPowerDbm
     uint32_t    bandwidth           = 25;
+    double      rsrqNoiseStdDb      = g_rsrqNoiseStdDb;
+    double      snrNoiseStdDb       = g_snrNoiseStdDb;
     std::string outputDir           = "output";
     // FBS distance-based placement
     double      fbsDistFromLbs      = 0.0;   // 0 = use fakePosX/Y directly
@@ -559,6 +640,8 @@ main(int argc, char* argv[])
     cmd.AddValue("txPower",          "LBS Tx power [dBm]",                  txPowerDbm);
     cmd.AddValue("fakeTxPower",      "FBS Tx power [dBm] (-1 = same as txPower)", fakeTxPowerDbm);
     cmd.AddValue("bandwidth",        "Bandwidth in resource blocks",        bandwidth);
+    cmd.AddValue("rsrqNoiseStd",     "Independent Gaussian noise std-dev for RSRQ [dB]", rsrqNoiseStdDb);
+    cmd.AddValue("snrNoiseStd",      "Independent Gaussian noise std-dev for SNR [dB]",  snrNoiseStdDb);
     cmd.AddValue("shadowingStd",     "Log-normal shadowing std-dev [dB] (0=disable)", g_shadowingStdDb);
     cmd.AddValue("shadowingSeed",    "RNG seed for shadowing noise",        g_shadowingSeed);
     cmd.AddValue("maxReportCells",   "Max cells per UE measurement report (0=all)", g_maxReportCells);
@@ -570,6 +653,9 @@ main(int argc, char* argv[])
     g_outputDir      = outputDir;
     g_txPowerDbm     = txPowerDbm;
     g_fakeTxPowerDbm = (fakeTxPowerDbm < 0.0) ? txPowerDbm : fakeTxPowerDbm;
+    g_bandwidthRbs   = bandwidth;
+    g_rsrqNoiseStdDb = std::max(0.0, rsrqNoiseStdDb);
+    g_snrNoiseStdDb  = std::max(0.0, snrNoiseStdDb);
 
     // Seed the shadowing RNG
     g_shadowRng.seed(g_shadowingSeed);

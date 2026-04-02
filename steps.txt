@@ -1,0 +1,11 @@
+docker compose run --build
+
+
+python3 detector/sliding_window_detector.py --results-dir results/fbs-medium --weight-profile old
+
+python3 detector/sliding_window_detector.py --results-dir results/fbs-medium --weight-profile new
+
+
+python3 compare_weight_profiles.py --results-dir results/fbs-medium
+
+python3 compare_weight_profiles.py --results-dir results
