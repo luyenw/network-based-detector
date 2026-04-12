@@ -162,29 +162,29 @@ def main() -> int:
 
         rows.append({
             "folder": folder.name,
-            "acc_old": old["accuracy"],
-            "acc_new": new["accuracy"],
-            "f1_old": old["f1"],
-            "f1_new": new["f1"],
-            "gap_old": old["score_gap"],
-            "gap_new": new["score_gap"],
+            # "acc_old": old["accuracy"],
+            # "acc_new": new["accuracy"],
+            # "f1_old": old["f1"],
+            # "f1_new": new["f1"],
+            # "gap_old": old["score_gap"],
+            # "gap_new": new["score_gap"],
+            "recall_old": old["recall"],
+            "recall_new": new["recall"],
             "mean_err_old": old["mean_err"],
             "mean_err_new": new["mean_err"],
-            "p90_err_old": old["p90_err"],
-            "p90_err_new": new["p90_err"],
+            # "p90_err_old": old["p90_err"],
+            # "p90_err_new": new["p90_err"],
         })
 
     print()
     print(
-        f"{'folder':15s} | {'acc_old':>8s} | {'acc_new':>8s} | {'f1_old':>8s} | {'f1_new':>8s} | "
-        f"{'gap_old':>8s} | {'gap_new':>8s} | {'mean_err_old':>12s} | {'mean_err_new':>12s}"
+        f"{'folder':15s} | {'recall_old':>10s} | {'recall_new':>10s} | "
+        f"{'mean_err_old':>12s} | {'mean_err_new':>12s}"
     )
     print("-" * 112)
     for row in rows:
         print(
-            f"{row['folder']:15s} | {fmt(row['acc_old']):>8s} | {fmt(row['acc_new']):>8s} | "
-            f"{fmt(row['f1_old']):>8s} | {fmt(row['f1_new']):>8s} | "
-            f"{fmt(row['gap_old']):>8s} | {fmt(row['gap_new']):>8s} | "
+            f"{row['folder']:15s} | {fmt(row['recall_old']):>10s} | {fmt(row['recall_new']):>10s} | "
             f"{fmt(row['mean_err_old']):>12s} | {fmt(row['mean_err_new']):>12s}"
         )
 
@@ -195,6 +195,11 @@ def main() -> int:
         print(f"  {folder}/detection_results.new.csv")
         print(f"  {folder}/ue_position_errors.old.csv")
         print(f"  {folder}/ue_position_errors.new.csv")
+
+    # Lưu file CSV tổng hợp để plot_weight_profile_comparison.py có thể đọc
+    summary_csv = target / "compare_weight_profiles_summary.csv"
+    pd.DataFrame(rows).to_csv(summary_csv, index=False)
+    print(f"\nSaved summary CSV: {summary_csv}")
 
     return 0
 

@@ -360,11 +360,11 @@ def process_ue(
     min_cells: int,
     n_starts:  int = 5,
     rng:       "np.random.Generator | None" = None,
-    lambda_ta: float = 0.0,
-    sigma_rsrq: float = 1.5,
+    lambda_ta: float = 0.001,
+    sigma_rsrq: float = 1.0,
     theta_snr: float = -20.0,
     sigma_var: float = 6.0,
-    delta_ta: float = 150.0,
+    delta_ta: float = 180.0,
 ) -> tuple:
     # §4 — mean RSRP per ECGI
     r_c = ue_meas.groupby("ecgi")["rsrp_dbm"].mean()
@@ -416,7 +416,26 @@ def process_ue(
     # error within the main loop to keep the function signatures unchanged where possible.
 
     # §7 — per-cell error
-    e_c        = np.abs(r_tilde - r_hat_tilde_star)
+    # e_c        = np.abs(r_tilde - r_hat_tilde_star)
+    
+    # --- CẢI THIỆN THUẬT TOÁN CỐT LÕI (ABSOLUTE POWER PENALTY) ---
+    # Thay vì chỉ dùng sai số hình học (dễ bị che giấu khi chuẩn hóa r_tilde nếu FBS phát công suất cực lớn),
+    # ta tính thêm hình phạt (penalty) dựa trên sự chênh lệch tuyệt đối của công suất thu (RSRP).
+    ue_z_fixed = 2.0
+    dist_star = np.sqrt((u_star[0] - cell_pos[:, 0]) ** 2 +
+                        (u_star[1] - cell_pos[:, 1]) ** 2 +
+                        (ue_z_fixed - cell_h) ** 2)
+    r_hat_star = tx_powers - _pl(np.maximum(dist_star, 1.0))
+    
+    # Tính phần công suất dư thừa (dB) - chỉ phạt khi RSRP thực tế lớn hơn lý thuyết
+    power_excess = np.maximum(0, r_c.values - r_hat_star)
+    
+    # Chuẩn hóa hình phạt (chia cho 10.0 dB tương đương 1 độ lệch chuẩn shadow fading)
+    power_penalty = power_excess / 10.0
+    
+    e_c = np.abs(r_tilde - r_hat_tilde_star) + power_penalty
+    # -------------------------------------------------------------
+        
     e_dict     = dict(zip(ecgis, e_c.tolist()))
     cellid_dict = {ecgi: ecgi_to_cellid.get(ecgi, -1) for ecgi in ecgis}
 
