@@ -14,13 +14,15 @@ Architecture is deliberately modular so that:
   • additional physics constraints can be added in score_cell()
   • real-time streaming can replace batch reads later
 
-Usage (called by ns-3 via system()):
+Usage:
     python3 /detector/detector.py
+    python3 /detector/detector.py --results-dir /output/fbs-zero
 """
 
 import os
 import sys
 import math
+import argparse
 import pandas as pd
 import numpy as np
 from datetime import datetime
@@ -28,10 +30,7 @@ from datetime import datetime
 # ---------------------------------------------------------------------------
 # Paths (Docker volume mounts)
 # ---------------------------------------------------------------------------
-OUTPUT_DIR        = "/output"
-MEASUREMENTS_PATH = os.path.join(OUTPUT_DIR, "measurements.csv")
-CELL_DB_PATH      = os.path.join(OUTPUT_DIR, "cell_database.csv")
-RESULTS_PATH      = os.path.join(OUTPUT_DIR, "detection_results.csv")
+DEFAULT_OUTPUT_DIR = "/output"
 
 # ---------------------------------------------------------------------------
 # Physical constants
@@ -50,6 +49,28 @@ MIN_OBSERVATIONS_FOR_SCORE = 3       # minimum UE reports needed to score a cell
 # ---------------------------------------------------------------------------
 # I/O helpers
 # ---------------------------------------------------------------------------
+
+def resolve_results_dir(cli_results_dir: str | None = None) -> str:
+    """
+    Resolve where CSV inputs/outputs live.
+
+    Priority:
+      1. --results-dir
+      2. DETECTOR_OUTPUT_DIR env var
+      3. /output inside Docker
+      4. <repo>/results when running from the host
+    """
+    if cli_results_dir:
+        return os.path.abspath(cli_results_dir)
+
+    env_dir = os.environ.get("DETECTOR_OUTPUT_DIR")
+    if env_dir:
+        return os.path.abspath(env_dir)
+
+    if os.path.isdir(DEFAULT_OUTPUT_DIR):
+        return DEFAULT_OUTPUT_DIR
+
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "results"))
 
 def load_cell_database(path: str) -> pd.DataFrame:
     """Load global cell topology database."""
@@ -75,6 +96,19 @@ def load_measurements(path: str) -> pd.DataFrame:
     df = pd.read_csv(path, skipinitialspace=True)
     df.columns = df.columns.str.strip()
     return df
+
+
+def select_join_key(cell_db: pd.DataFrame, measurements: pd.DataFrame) -> str:
+    """Pick a cell identifier column that exists in both inputs."""
+    if "ecgi" in cell_db.columns and "ecgi" in measurements.columns:
+        return "ecgi"
+    if "cell_id" in cell_db.columns and "serving_cell_id" in measurements.columns:
+        return "cell_id"
+    if "cell_id" in cell_db.columns and "cell_id" in measurements.columns:
+        return "cell_id"
+    raise KeyError(
+        "No compatible cell identifier found between cell_database.csv and measurements.csv"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -245,31 +279,39 @@ def score_cell(cell_id: int,
 # Main detector pipeline
 # ---------------------------------------------------------------------------
 
-def run_detector():
+def run_detector(results_dir: str | None = None):
     timestamp = datetime.utcnow().isoformat()
     sim_time  = 0.0
+    resolved_results_dir = resolve_results_dir(results_dir)
+    measurements_path = os.path.join(resolved_results_dir, "measurements.csv")
+    cell_db_path = os.path.join(resolved_results_dir, "cell_database.csv")
+    results_path = os.path.join(resolved_results_dir, "detection_results.csv")
 
     print(f"[detector] Running at UTC {timestamp}", flush=True)
+    print(f"[detector] Using results dir: {resolved_results_dir}", flush=True)
 
     # -- Load inputs --
-    cell_db      = load_cell_database(CELL_DB_PATH)
-    measurements = load_measurements(MEASUREMENTS_PATH)
+    cell_db      = load_cell_database(cell_db_path)
+    measurements = load_measurements(measurements_path)
 
     if measurements.empty:
         print("[detector] No measurements yet — writing empty results.", flush=True)
+        os.makedirs(resolved_results_dir, exist_ok=True)
         pd.DataFrame(columns=[
             "time_sec", "cell_id", "score", "is_fake_detected",
             "est_x", "est_y", "n_obs", "ta_score", "rsrp_score"
-        ]).to_csv(RESULTS_PATH, index=False)
+        ]).to_csv(results_path, index=False)
         return
 
     sim_time = float(measurements["time_sec"].max())
+
+    join_key = select_join_key(cell_db, measurements)
 
     # Build cell lookup dict
     cell_lookup = {}
     if not cell_db.empty:
         for _, row in cell_db.iterrows():
-            cid = int(row["cell_id"])
+            cid = row[join_key]
             cell_lookup[cid] = {
                 "pos_x":        float(row["pos_x"]),
                 "pos_y":        float(row["pos_y"]),
@@ -279,8 +321,7 @@ def run_detector():
 
     # -- Score each observed cell --
     results = []
-    for cell_id, group in measurements.groupby("serving_cell_id"):
-        cell_id   = int(cell_id)
+    for cell_id, group in measurements.groupby(join_key):
         cell_info = cell_lookup.get(cell_id, {"pos_x": 0, "pos_y": 0,
                                                "tx_power_dbm": 46.0,
                                                "is_fake": 0})
@@ -292,7 +333,8 @@ def run_detector():
     cols = ["time_sec", "cell_id", "score", "is_fake_detected",
             "est_x", "est_y", "n_obs", "ta_score", "rsrp_score"]
     df_results = pd.DataFrame(results)[cols]
-    df_results.to_csv(RESULTS_PATH, index=False)
+    os.makedirs(resolved_results_dir, exist_ok=True)
+    df_results.to_csv(results_path, index=False)
 
     # -- Console summary --
     print(f"[detector] Scored {len(results)} cells at t={sim_time:.3f}s", flush=True)
@@ -302,7 +344,7 @@ def run_detector():
     else:
         print(f"[detector] ALERT — {len(flagged)} cell(s) flagged:", flush=True)
         for _, row in flagged.iterrows():
-            print(f"  cell_id={int(row['cell_id'])}  score={row['score']:.4f}"
+            print(f"  cell_id={row['cell_id']}  score={row['score']:.4f}"
                   f"  est_pos=({row['est_x']}, {row['est_y']})", flush=True)
 
 
@@ -311,7 +353,14 @@ def run_detector():
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     try:
-        run_detector()
+        parser = argparse.ArgumentParser()
+        parser.add_argument(
+            "--results-dir",
+            default=None,
+            help="Directory containing measurements.csv and cell_database.csv",
+        )
+        args = parser.parse_args()
+        run_detector(results_dir=args.results_dir)
     except Exception as exc:
         print(f"[detector] ERROR: {exc}", file=sys.stderr, flush=True)
         sys.exit(1)

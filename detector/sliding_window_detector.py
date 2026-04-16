@@ -57,14 +57,26 @@ import argparse
 import concurrent.futures
 import logging
 import os
+import sys
 import time
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pandas as pd
-from scipy.optimize import minimize as _scipy_minimize
 
-from fake_localizer import localize_fake, write_localization_report  # kept for potential external use
+try:
+    from scipy.optimize import minimize as _scipy_minimize
+    _SCIPY_IMPORT_ERROR = None
+except Exception as exc:
+    _scipy_minimize = None
+    _SCIPY_IMPORT_ERROR = exc
+
+try:
+    from fake_localizer import localize_fake, write_localization_report  # kept for potential external use
+except Exception:
+    localize_fake = None
+    write_localization_report = None
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -77,6 +89,65 @@ logging.basicConfig(
 log = logging.getLogger("SlidingWindowDetector")
 
 
+WEIGHT_PROFILES = {
+    "old": {
+        "sigma_rsrq": 1000.0,
+        "theta_snr": -1000.0,
+        "sigma_var": 1000.0,
+    },
+    "new": {
+        "sigma_rsrq": 1.5,
+        "theta_snr": -20.0,
+        "sigma_var": 6.0,
+    },
+}
+
+
+def _fallback_minimize(
+    objective,
+    p0: np.ndarray,
+    bounds: tuple[tuple[float, float], tuple[float, float]],
+    maxiter: int = 200,
+) -> SimpleNamespace:
+    """
+    Lightweight derivative-free fallback when SciPy is unavailable.
+    Uses a shrinking coordinate-pattern search in 2-D.
+    """
+    p = np.array(p0, dtype=float).copy()
+    p[0] = np.clip(p[0], bounds[0][0], bounds[0][1])
+    p[1] = np.clip(p[1], bounds[1][0], bounds[1][1])
+
+    span_x = max(bounds[0][1] - bounds[0][0], 1.0)
+    span_y = max(bounds[1][1] - bounds[1][0], 1.0)
+    step = max(span_x, span_y) / 4.0
+    best_val = float(objective(p))
+
+    for _ in range(maxiter):
+        improved = False
+        for dx, dy in ((step, 0.0), (-step, 0.0), (0.0, step), (0.0, -step)):
+            cand = np.array([
+                np.clip(p[0] + dx, bounds[0][0], bounds[0][1]),
+                np.clip(p[1] + dy, bounds[1][0], bounds[1][1]),
+            ])
+            val = float(objective(cand))
+            if val < best_val:
+                p = cand
+                best_val = val
+                improved = True
+        if not improved:
+            step *= 0.5
+            if step < 1e-2:
+                break
+
+    return SimpleNamespace(x=p, fun=best_val, success=True, message="fallback-pattern-search")
+
+
+def _normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """Trim whitespace from CSV header names emitted by some result generators."""
+    renamed = df.rename(columns={col: str(col).strip() for col in df.columns})
+    return renamed
+
+
 # ---------------------------------------------------------------------------
 # Path-loss model  (§2)
 #   PL [dB] = 128.1 + 37.6 · log10(d_km)
@@ -84,6 +155,85 @@ log = logging.getLogger("SlidingWindowDetector")
 # ---------------------------------------------------------------------------
 def _pl(dist_m: np.ndarray) -> np.ndarray:
     return 128.1 + 37.6 * np.log10(np.maximum(dist_m, 1.0) / 1000.0)
+
+
+def _rsrp_to_distance(rsrp_dbm: np.ndarray, tx_power_dbm: np.ndarray) -> np.ndarray:
+    """Invert COST-231 path-loss to recover range from RSRP."""
+    pl_db = tx_power_dbm - rsrp_dbm
+    d_km = np.power(10.0, (pl_db - 128.1) / 37.6)
+    return np.maximum(d_km * 1000.0, 1.0)
+
+
+def _find_optional_column(df: pd.DataFrame, candidates: list[str]) -> str | None:
+    for name in candidates:
+        if name in df.columns:
+            return name
+    return None
+
+
+def _measurement_weights(
+    ue_meas: pd.DataFrame,
+    common: pd.Index,
+    tx_powers: np.ndarray,
+    sigma_rsrq: float,
+    theta_snr: float,
+    sigma_var: float,
+    delta_ta: float,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """
+    Build adaptive measurement weights from update.md.
+
+    Returns:
+      dist_rsrp   inferred range from mean RSRP
+      weight_rsrp composite reliability weight W_i
+      dist_ta     TA-derived range (NaN if unavailable)
+      weight_ta   TA consistency weight
+    """
+    grouped = ue_meas.groupby("ecgi")
+    rsrp_mean = grouped["rsrp_dbm"].mean().reindex(common)
+    rsrp_var = grouped["rsrp_dbm"].var(ddof=0).reindex(common).fillna(0.0)
+
+    dist_rsrp = _rsrp_to_distance(rsrp_mean.values.astype(float), tx_powers.astype(float))
+    w_var = np.exp(-rsrp_var.values.astype(float) / max(sigma_var ** 2, 1e-9))
+
+    rsrq_col = _find_optional_column(ue_meas, ["rsrq", "rsrq_db", "rsrq_dbm"])
+    if rsrq_col is not None:
+        rsrq_mean = grouped[rsrq_col].mean().reindex(common)
+        serving_mask = ue_meas["cell_role"] == "S"
+        rsrq_ref_series = ue_meas.loc[serving_mask, rsrq_col].dropna()
+        if not rsrq_ref_series.empty:
+            rsrq_ref = float(rsrq_ref_series.mean())
+        else:
+            rsrq_ref = float(rsrq_mean.dropna().median()) if rsrq_mean.notna().any() else 0.0
+        w_rsrq = np.exp(-((rsrq_ref - rsrq_mean.fillna(rsrq_ref).values.astype(float)) ** 2) /
+                        max(sigma_rsrq ** 2, 1e-9))
+    else:
+        w_rsrq = np.ones(len(common), dtype=float)
+
+    snr_col = _find_optional_column(ue_meas, ["snr", "snr_db", "snr_dbm"])
+    if snr_col is not None:
+        snr_mean = grouped[snr_col].mean().reindex(common).fillna(theta_snr).values.astype(float)
+        w_snr = 1.0 / (1.0 + np.exp(-(snr_mean - theta_snr)))
+    else:
+        w_snr = np.ones(len(common), dtype=float)
+
+    weight_rsrp = np.clip(w_rsrq * w_snr * w_var, 1e-6, 1.0)
+
+    if "timing_advance" in ue_meas.columns:
+        ta_mean = grouped["timing_advance"].mean().reindex(common)
+        dist_ta = ta_mean.values.astype(float) * 78.12
+        valid_ta = np.isfinite(dist_ta)
+        diff = dist_rsrp - np.where(valid_ta, dist_ta, dist_rsrp)
+        weight_ta = np.zeros(len(common), dtype=float)
+        weight_ta[valid_ta] = np.exp(-(diff[valid_ta] ** 2) / max(delta_ta ** 2, 1e-9))
+        return dist_rsrp, weight_rsrp, dist_ta, weight_ta
+
+    return (
+        dist_rsrp,
+        weight_rsrp,
+        np.full(len(common), np.nan, dtype=float),
+        np.zeros(len(common), dtype=float),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -118,12 +268,14 @@ def _estimate_ue_pos(
     cell_pos:   np.ndarray,
     cell_h:     np.ndarray,
     tx_powers:  np.ndarray,
+    dist_rsrp:  np.ndarray,
+    weight_rsrp: np.ndarray,
+    dist_ta:    np.ndarray | None = None,
+    weight_ta:  np.ndarray | None = None,
     n_starts:   int = 5,
     rng:        "np.random.Generator | None" = None,
     excl_margin: float = 500.0,
-    s_pos:      "np.ndarray | None" = None,
-    s_dist_ta:  "float | None" = None,
-    lambda_ta:  float = 0.0,
+    lambda_ta:  float = 0.5,
 ) -> tuple:
     N = len(r_tilde)
     if N == 0:
@@ -135,21 +287,25 @@ def _estimate_ue_pos(
     x_min, x_max = cell_pos[:, 0].min(), cell_pos[:, 0].max()
     y_min, y_max = cell_pos[:, 1].min(), cell_pos[:, 1].max()
     ue_z_fixed = 2.0   # handheld device height [m]
+    bounds = (
+        (x_min - excl_margin, x_max + excl_margin),
+        (y_min - excl_margin, y_max + excl_margin),
+    )
 
     def objective(p: np.ndarray) -> float:
         dist    = np.sqrt((p[0] - cell_pos[:, 0]) ** 2 +
                           (p[1] - cell_pos[:, 1]) ** 2 +
                           (ue_z_fixed - cell_h) ** 2)
-        r_hat   = tx_powers - _pl(np.maximum(dist, 1.0))
-        r_hat_t = (r_hat - mu) / sigma
-        mse     = float(np.mean((r_tilde - r_hat_t) ** 2))
-        
-        if lambda_ta > 0.0 and s_pos is not None and s_dist_ta is not None:
-            dist_s  = np.sqrt((p[0] - s_pos[0])**2 + (p[1] - s_pos[1])**2 + (ue_z_fixed - s_pos[2])**2)
-            penalty = lambda_ta * ((dist_s - s_dist_ta) ** 2)
-            return mse + float(penalty)
-            
-        return mse
+        rsrp_term = weight_rsrp * ((dist - dist_rsrp) ** 2)
+        total = float(np.mean(rsrp_term))
+
+        if lambda_ta > 0.0 and dist_ta is not None and weight_ta is not None:
+            valid_ta = np.isfinite(dist_ta) & (weight_ta > 0.0)
+            if np.any(valid_ta):
+                ta_term = weight_ta[valid_ta] * ((dist[valid_ta] - dist_ta[valid_ta]) ** 2)
+                total += lambda_ta * float(np.mean(ta_term))
+
+        return total
 
     # Starting points
     centroid = cell_pos.mean(axis=0)
@@ -162,10 +318,14 @@ def _estimate_ue_pos(
     best_u = centroid.copy()
     best_R = np.inf
     for p0 in starts:
-        res = _scipy_minimize(
-            objective, p0, method="L-BFGS-B",
-            options={"maxiter": 200, "ftol": 1e-12, "gtol": 1e-9},
-        )
+        if _scipy_minimize is not None:
+            res = _scipy_minimize(
+                objective, p0, method="L-BFGS-B",
+                bounds=bounds,
+                options={"maxiter": 200, "ftol": 1e-12, "gtol": 1e-9},
+            )
+        else:
+            res = _fallback_minimize(objective, p0, bounds=bounds, maxiter=200)
         p = res.x
         R = objective(p)
         if R < best_R:
@@ -200,20 +360,12 @@ def process_ue(
     min_cells: int,
     n_starts:  int = 5,
     rng:       "np.random.Generator | None" = None,
-    lambda_ta: float = 0.0,
+    lambda_ta: float = 0.001,
+    sigma_rsrq: float = 1.0,
+    theta_snr: float = -20.0,
+    sigma_var: float = 6.0,
+    delta_ta: float = 180.0,
 ) -> tuple:
-    s_pos = None
-    s_dist_ta = None
-    if lambda_ta > 0.0:
-        serving_rows = ue_meas[ue_meas["cell_role"] == "S"]
-        if len(serving_rows) > 0:
-            s_ecgi = serving_rows["ecgi"].iloc[0]
-            if s_ecgi in legal.index:
-                s_ta = serving_rows["timing_advance"].iloc[0]
-                if not pd.isna(s_ta):
-                    s_dist_ta = float(s_ta) * 78.12
-                    s_pos = legal.loc[s_ecgi, ["pos_x", "pos_y", "pos_z"]].values
-
     # §4 — mean RSRP per ECGI
     r_c = ue_meas.groupby("ecgi")["rsrp_dbm"].mean()
 
@@ -241,19 +393,49 @@ def process_ue(
     cell_h    = legal.loc[common, "pos_z"].values
     tx_powers = legal.loc[common, "tx_power_dbm"].values
     ecgis     = common.tolist()
+    dist_rsrp, weight_rsrp, dist_ta, weight_ta = _measurement_weights(
+        ue_meas, common, tx_powers,
+        sigma_rsrq=sigma_rsrq,
+        theta_snr=theta_snr,
+        sigma_var=sigma_var,
+        delta_ta=delta_ta,
+    )
 
     # §6 — multi-start optimiser for u*
     u_star, R_star, r_hat_tilde_star = _estimate_ue_pos(
         r_tilde, mu, sigma, cell_pos, cell_h, tx_powers,
+        dist_rsrp=dist_rsrp,
+        weight_rsrp=weight_rsrp,
+        dist_ta=dist_ta,
+        weight_ta=weight_ta,
         n_starts=n_starts, rng=rng,
-        s_pos=s_pos, s_dist_ta=s_dist_ta, lambda_ta=lambda_ta,
+        lambda_ta=lambda_ta,
     )
 
     # Note: process_ue now also needs ground truth to calculate errors later, but we calculate
     # error within the main loop to keep the function signatures unchanged where possible.
 
     # §7 — per-cell error
-    e_c        = np.abs(r_tilde - r_hat_tilde_star)
+    # e_c        = np.abs(r_tilde - r_hat_tilde_star)
+    
+    # --- CẢI THIỆN THUẬT TOÁN CỐT LÕI (ABSOLUTE POWER PENALTY) ---
+    # Thay vì chỉ dùng sai số hình học (dễ bị che giấu khi chuẩn hóa r_tilde nếu FBS phát công suất cực lớn),
+    # ta tính thêm hình phạt (penalty) dựa trên sự chênh lệch tuyệt đối của công suất thu (RSRP).
+    ue_z_fixed = 2.0
+    dist_star = np.sqrt((u_star[0] - cell_pos[:, 0]) ** 2 +
+                        (u_star[1] - cell_pos[:, 1]) ** 2 +
+                        (ue_z_fixed - cell_h) ** 2)
+    r_hat_star = tx_powers - _pl(np.maximum(dist_star, 1.0))
+    
+    # Tính phần công suất dư thừa (dB) - chỉ phạt khi RSRP thực tế lớn hơn lý thuyết
+    power_excess = np.maximum(0, r_c.values - r_hat_star)
+    
+    # Chuẩn hóa hình phạt (chia cho 10.0 dB tương đương 1 độ lệch chuẩn shadow fading)
+    power_penalty = power_excess / 10.0
+    
+    e_c = np.abs(r_tilde - r_hat_tilde_star) + power_penalty
+    # -------------------------------------------------------------
+        
     e_dict     = dict(zip(ecgis, e_c.tolist()))
     cellid_dict = {ecgi: ecgi_to_cellid.get(ecgi, -1) for ecgi in ecgis}
 
@@ -330,14 +512,6 @@ def _collect_ue_loc_data(
         r_is  = float(serving_rows["rsrp_dbm"].mean())
         s_row = legal.loc[s_ecgi]
 
-        s_pos_ta = None
-        s_dist_ta = None
-        if lambda_ta > 0.0:
-            s_ta = serving_rows["timing_advance"].iloc[0]
-            if not pd.isna(s_ta):
-                s_dist_ta = float(s_ta) * 78.12
-                s_pos_ta = s_row[["pos_x", "pos_y", "pos_z"]].values
-
         # Re-estimate UE position excluding the fake ECGI
         rc_clean = (
             ue_rows.groupby("ecgi")["rsrp_dbm"]
@@ -356,10 +530,18 @@ def _collect_ue_loc_data(
                 cell_pos  = legal.loc[common, ["pos_x", "pos_y"]].values
                 cell_h    = legal.loc[common, "pos_z"].values
                 tx_powers = legal.loc[common, "tx_power_dbm"].values
+                dist_rsrp, weight_rsrp, dist_ta, weight_ta = _measurement_weights(
+                    ue_rows[ue_rows["ecgi"] != ecgi_f], common, tx_powers,
+                    sigma_rsrq=1.5, theta_snr=-20.0, sigma_var=6.0, delta_ta=150.0,
+                )
                 u_opt, _, _ = _estimate_ue_pos(
                     r_tilde, mu, sigma, cell_pos, cell_h, tx_powers,
+                    dist_rsrp=dist_rsrp,
+                    weight_rsrp=weight_rsrp,
+                    dist_ta=dist_ta,
+                    weight_ta=weight_ta,
                     n_starts=n_starts, rng=rng,
-                    s_pos=s_pos_ta, s_dist_ta=s_dist_ta, lambda_ta=lambda_ta,
+                    lambda_ta=lambda_ta,
                 )
                 u_pos = u_opt
 
@@ -465,6 +647,10 @@ def _process_window_task(
     min_cells:    int,
     n_ue_starts:  int,
     lambda_ta:    float,
+    sigma_rsrq:   float,
+    theta_snr:    float,
+    sigma_var:    float,
+    delta_ta:     float,
     method:       str,
     k_sigma:      float,
     sigma_total:  float,
@@ -491,6 +677,8 @@ def _process_window_task(
         e_dict, u_star, R_star, _ = process_ue(
             ue_meas, legal, min_cells,
             n_starts=n_ue_starts, rng=rng, lambda_ta=lambda_ta,
+            sigma_rsrq=sigma_rsrq, theta_snr=theta_snr,
+            sigma_var=sigma_var, delta_ta=delta_ta,
         )
         if e_dict is None:
             continue
@@ -600,6 +788,10 @@ def run_detection(
     min_cells:    int   = 2,
     sigma_total:  float = 9.1,
     lambda_ta:    float = 0.001,
+    sigma_rsrq:   float = 1.5,
+    theta_snr:    float = -20.0,
+    sigma_var:    float = 6.0,
+    delta_ta:     float = 150.0,
     n_workers:    int   = 0,       # 0 = use os.cpu_count()
 ) -> None:
     """
@@ -618,13 +810,20 @@ def run_detection(
     log.info("n_ue_starts   : %d", n_ue_starts)
     log.info("threshold     : adaptive  method=%s  k=%.2f", method, k_sigma)
     log.info("σ_total       : %.1f dB  (for anomaly weight w_i in detection_log)", sigma_total)
+    log.info("weights       : sigma_rsrq=%.2f  theta_snr=%.2f  sigma_var=%.2f  delta_ta=%.2f  lambda_ta=%.4f",
+             sigma_rsrq, theta_snr, sigma_var, delta_ta, lambda_ta)
+    if _SCIPY_IMPORT_ERROR is not None:
+        log.warning(
+            "SciPy is unavailable or incompatible (%s). Falling back to the built-in optimizer.",
+            _SCIPY_IMPORT_ERROR,
+        )
 
-    meas = pd.read_csv(results_dir / "measurements.csv",  skipinitialspace=True)
+    meas = _normalize_columns(pd.read_csv(results_dir / "measurements.csv",  skipinitialspace=True))
     
     if "ue_z" not in meas.columns:
         meas["ue_z"] = 0.0
 
-    db   = pd.read_csv(results_dir / "cell_database.csv", skipinitialspace=True)
+    db   = _normalize_columns(pd.read_csv(results_dir / "cell_database.csv", skipinitialspace=True))
 
     log.info("measurements.csv : %d rows, T ∈ [%.1f, %.1f] s",
              len(meas), meas["time_sec"].min(), meas["time_sec"].max())
@@ -686,6 +885,7 @@ def run_detection(
                 _process_window_task,
                 T, M_T, legal, ecgi_gt_fake,
                 min_cells, n_ue_starts, lambda_ta,
+                sigma_rsrq, theta_snr, sigma_var, delta_ta,
                 method, k_sigma, sigma_total, k,
             ): (k, T)
             for k, T, M_T in window_slices
@@ -861,6 +1061,27 @@ if __name__ == "__main__":
         help="Weight for the TA distance constraint in UE estimation (default: 0.0)",
     )
     ap.add_argument(
+        "--weight-profile", default="new", choices=["old", "new"],
+        help="Preset for measurement weighting: 'old' disables RSRQ/SNR/variance effects, "
+             "'new' enables the current weighted scheme (default: new)",
+    )
+    ap.add_argument(
+        "--sigma-rsrq", type=float, default=1.5,
+        help="Spread parameter for the RSRQ reliability weight (default: 1.5)",
+    )
+    ap.add_argument(
+        "--theta-snr", type=float, default=-20.0,
+        help="SNR threshold used in the sigmoid reliability weight (default: -20.0)",
+    )
+    ap.add_argument(
+        "--sigma-var", type=float, default=6.0,
+        help="Variance scale for the temporal RSRP stability weight (default: 6.0)",
+    )
+    ap.add_argument(
+        "--delta-ta", type=float, default=150.0,
+        help="Consistency scale [m] for the Timing Advance weight (default: 150.0)",
+    )
+    ap.add_argument(
         "--n-workers", type=int, default=0,
         help="Worker processes for parallel window detection "
              "(0 = auto = cpu_count, default: 0)",
@@ -876,6 +1097,20 @@ if __name__ == "__main__":
     )
     args = ap.parse_args()
 
+    profile = WEIGHT_PROFILES[args.weight_profile]
+    sigma_rsrq = args.sigma_rsrq
+    theta_snr = args.theta_snr
+    sigma_var = args.sigma_var
+
+    # Profile presets apply first; users can still override individual flags explicitly.
+    argv = sys.argv[1:]
+    if "--sigma-rsrq" not in argv:
+        sigma_rsrq = profile["sigma_rsrq"]
+    if "--theta-snr" not in argv:
+        theta_snr = profile["theta_snr"]
+    if "--sigma-var" not in argv:
+        sigma_var = profile["sigma_var"]
+
     logging.getLogger().setLevel(args.log_level)
     log.setLevel(args.log_level)
 
@@ -887,5 +1122,9 @@ if __name__ == "__main__":
         min_cells=args.min_cells,
         sigma_total=args.sigma_total,
         lambda_ta=args.lambda_ta,
+        sigma_rsrq=sigma_rsrq,
+        theta_snr=theta_snr,
+        sigma_var=sigma_var,
+        delta_ta=args.delta_ta,
         n_workers=args.n_workers,
     )

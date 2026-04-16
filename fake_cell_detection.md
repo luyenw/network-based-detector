@@ -4,6 +4,11 @@
 
     time_sec, imsi, ue_x, ue_y, ecgi, cell_role(N/S), rsrp_dbm, timing_advance
 
+Optional quality fields when available:
+
+    rsrq | rsrq_db | rsrq_dbm
+    snr  | snr_db  | snr_dbm
+
 Cell database:
 
 $$
@@ -108,15 +113,81 @@ $$
 
 ------------------------------------------------------------------------
 
-## 6. Residual Function
+## 6. Measurement Reliability Weights
 
-Residual at position $u$:
+For each cell measurement \(i\), define:
+
+$$
+w_i^{(\mathrm{RSRQ})}
+=
+\exp\left(
+- \frac{(\mathrm{RSRQ}_{\mathrm{ref}} - \mathrm{RSRQ}_i)^2}
+{\sigma_{\mathrm{RSRQ}}^2}
+\right)
+$$
+
+$$
+w_i^{(\mathrm{SNR})}
+=
+\frac{1}{1 + e^{-(\mathrm{SNR}_i - \theta)}}
+$$
+
+$$
+w_i^{(\mathrm{var})}
+=
+\exp\left(
+- \frac{\mathrm{Var}(\mathrm{RSRP}_i(t))}
+{\sigma_{\mathrm{var}}^2}
+\right)
+$$
+
+Composite RSRP reliability:
+
+$$
+W_i = w_i^{(\mathrm{RSRQ})} \cdot w_i^{(\mathrm{SNR})} \cdot w_i^{(\mathrm{var})}
+$$
+
+Timing Advance consistency weight:
+
+$$
+w_i^{(\mathrm{TA})}
+=
+\exp\left(
+- \frac{(d_i^{\circ}(\mathrm{RSRP}) - d_i^{(\mathrm{TA})})^2}
+{\Delta^2}
+\right)
+$$
+
+If `RSRQ` or `SNR` are not present in the measurement file, their weights default to 1.
+
+------------------------------------------------------------------------
+
+## 7. Weighted UE Position Objective
+
+Distance inferred from mean RSRP:
+
+$$
+d_i^{\circ}(\mathrm{RSRP})
+=
+PL^{-1}(P_i - r_i)
+$$
+
+Weighted objective at position \(u\):
 
 $$
 R(u) =
-\frac{1}{N}
-\sum_c
-(\tilde{r}_c - \tilde{\hat{r}}_c(u))^2
+\sum_i
+W_i
+\left(
+\lVert \mathbf{u} - \mathbf{b}_i \rVert - d_i^{\circ}(\mathrm{RSRP})
+\right)^2
++
+\lambda_{\mathrm{TA}}
+\sum_i
+w_i^{(\mathrm{TA})}
+\left(
+\lVert \mathbf{u} - \mathbf{b}_i \rVert - d_i^{(\mathrm{TA})}
+\right)^2
 $$
 
 Optimal UE position:
@@ -134,7 +205,7 @@ $$
 
 ------------------------------------------------------------------------
 
-## 7. Per-Cell Residual
+## 8. Per-Cell Residual
 
 Per-cell error:
 
@@ -156,7 +227,7 @@ $$
 
 ------------------------------------------------------------------------
 
-## 8. Fake Cell Detection Rule
+## 9. Fake Cell Detection Rule
 
 Threshold:
 
@@ -176,7 +247,7 @@ $$
 
 ------------------------------------------------------------------------
 
-## 9. Sliding Window Algorithm
+## 10. Sliding Window Algorithm
 
 For:
 
@@ -192,23 +263,25 @@ $$
 [0, T]
 $$
 
-2.  Normalize RSRP
+2.  Aggregate per-cell mean RSRP and quality statistics
 
-3.  Estimate UE position:
+3.  Build adaptive weights \(W_i\) and \(w_i^{(\mathrm{TA})}\)
+
+4.  Estimate UE position:
 
 $$
 u^* = \arg\min R(u)
 $$
 
-4.  Compute per-cell residual
+5.  Compute normalized per-cell residual
 
-5.  Accumulate score
+6.  Accumulate score
 
-6.  Detect fake cells
+7.  Detect fake cells
 
 ------------------------------------------------------------------------
 
-## 10. Runtime Logging
+## 11. Runtime Logging
 
 Log per window:
 
@@ -225,12 +298,12 @@ Per cell log:
 
 ------------------------------------------------------------------------
 
-## 11. Full Pipeline Summary
+## 12. Full Pipeline Summary
 
 $$
 Measurement
 \rightarrow
-Normalize
+\mathrm{Weighting}
 \rightarrow
 Estimate\ UE
 \rightarrow

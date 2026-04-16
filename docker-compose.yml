@@ -69,13 +69,50 @@ services:
       - "--fakeEci=1"
       - "--fakePosX=0"
       - "--fakePosY=0"
-      - "--txPower=46"
+      - "--txPower=40"
       - "--bandwidth=25"
       - "--isd=500"
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
       - "--outputDir=/output/fbs-zero"
+
+  # ── FBS zero distance (dist ≈ 0 m) with different power variants ─────
+  sim-fbs-power-60-zero:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=0"
+      - "--fakePosY=0"
+      - "--txPower=60" # Công suất 60 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-60-zero"
+
+  sim-fbs-power-80-zero:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=0"
+      - "--fakePosY=0"
+      - "--txPower=80" # Công suất 80 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-80-zero"
 
   # ── FBS close to LBS: (70.7, 70.7)  dist = 100 m ──────────────────────────
   sim-fbs-close:
@@ -88,13 +125,50 @@ services:
       - "--fakeEci=1"
       - "--fakePosX=70.7"
       - "--fakePosY=70.7"
-      - "--txPower=46"
+      - "--txPower=40"
       - "--bandwidth=25"
       - "--isd=500"
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
       - "--outputDir=/output/fbs-close"
+
+  # ── FBS close distance (dist ≈ 100 m) with different power variants ─────
+  sim-fbs-power-60-close:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=70.7"
+      - "--fakePosY=70.7"
+      - "--txPower=60" # Công suất 60 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-60-close"
+
+  sim-fbs-power-80-close:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=70.7"
+      - "--fakePosY=70.7"
+      - "--txPower=80" # Công suất 80 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-80-close"
 
   # ── FBS close to LBS: (141.4, 141.4)  dist = 200 m ────────────────────────
   sim-fbs-close2:
@@ -107,13 +181,50 @@ services:
       - "--fakeEci=1"
       - "--fakePosX=141.4"
       - "--fakePosY=141.4"
-      - "--txPower=46"
+      - "--txPower=40"
       - "--bandwidth=25"
       - "--isd=500"
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
       - "--outputDir=/output/fbs-close2"
+
+  # ── FBS close distance (dist ≈ 200 m) with different power variants ─────
+  sim-fbs-power-60-close2:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=141.4"
+      - "--fakePosY=141.4"
+      - "--txPower=60" # Công suất 60 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-60-close2"
+
+  sim-fbs-power-80-close2:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=141.4"
+      - "--fakePosY=141.4"
+      - "--txPower=80" # Công suất 80 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-80-close2"
 
   # ── FBS medium distance: (353.5, 353.5)  dist ≈ 500 m ─────────────────────
   sim-fbs-medium:
@@ -126,13 +237,50 @@ services:
       - "--fakeEci=1"
       - "--fakePosX=353.5"
       - "--fakePosY=353.5"
-      - "--txPower=46"
+      - "--txPower=40"
       - "--bandwidth=25"
       - "--isd=500"
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
       - "--outputDir=/output/fbs-medium"
+
+  # ── FBS medium distance (dist ≈ 500 m) with different power variants ─────
+  sim-fbs-power-60-medium:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=353.5"
+      - "--fakePosY=353.5"
+      - "--txPower=60" # Công suất 60 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-60-medium"
+
+  sim-fbs-power-80-medium:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=353.5"
+      - "--fakePosY=353.5"
+      - "--txPower=80" # Công suất 80 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-80-medium"
 
   # ── FBS far from LBS: (707.1, 707.1)  dist ≈ 1000 m ───────────────────────
   sim-fbs-far:
@@ -145,13 +293,50 @@ services:
       - "--fakeEci=1"
       - "--fakePosX=707.1"
       - "--fakePosY=707.1"
-      - "--txPower=46"
+      - "--txPower=40"
       - "--bandwidth=25"
       - "--isd=500"
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
       - "--outputDir=/output/fbs-far"
+
+  # ── FBS far distance (dist ≈ 1000 m) with different power variants ─────
+  sim-fbs-power-60-far:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=707.1"
+      - "--fakePosY=707.1"
+      - "--txPower=60" # Công suất 60 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-60-far"
+
+  sim-fbs-power-80-far:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=707.1"
+      - "--fakePosY=707.1"
+      - "--txPower=80" # Công suất 80 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-80-far"
 
   # ── FBS very far: (1400, 1000)  dist ≈ 1721 m ─────────────────────────────
   sim-fbs-veryfar:
@@ -164,13 +349,50 @@ services:
       - "--fakeEci=1"
       - "--fakePosX=1400"
       - "--fakePosY=1000"
-      - "--txPower=46"
+      - "--txPower=40"
       - "--bandwidth=25"
       - "--isd=500"
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
       - "--outputDir=/output/fbs-veryfar"
+
+  # ── FBS very far distance (dist ≈ 1721 m) with different power variants ─────
+  sim-fbs-power-60-very-far:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=1400"
+      - "--fakePosY=1000"
+      - "--txPower=60" # Công suất 60 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-60-very-far"
+
+  sim-fbs-power-80-very-far:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=1400"
+      - "--fakePosY=1000"
+      - "--txPower=80" # Công suất 80 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-80-very-far"
 
   # ── FBS near grid edge: (1900, 1800)  dist ≈ 2614 m ───────────────────────
   # Easiest case: FBS far from impersonated cell, near opposite corner.
@@ -185,10 +407,47 @@ services:
       - "--fakeEci=1"
       - "--fakePosX=1900"
       - "--fakePosY=1800"
-      - "--txPower=46"
+      - "--txPower=40"
       - "--bandwidth=25"
       - "--isd=500"
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
       - "--outputDir=/output/fbs-edge"
+
+  # ── FBS edge distance (dist ≈ 2614 m) with different power variants ─────
+  sim-fbs-power-60-edge:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=1900"
+      - "--fakePosY=1800"
+      - "--txPower=60" # Công suất 60 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-60-edge"
+
+  sim-fbs-power-80-edge:
+    <<: *sim-base
+    command:
+      - "--gridSize=5"
+      - "--numUe=200"
+      - "--simTime=60"
+      - "--detectorInterval=1.0"
+      - "--fakeEci=1"
+      - "--fakePosX=1900"
+      - "--fakePosY=1800"
+      - "--txPower=80" # Công suất 80 dBm
+      - "--bandwidth=25"
+      - "--isd=500"
+      - "--shadowingStd=8.0"
+      - "--shadowingSeed=42"
+      - "--maxReportCells=0"
+      - "--outputDir=/output/fbs-power-80-edge"
