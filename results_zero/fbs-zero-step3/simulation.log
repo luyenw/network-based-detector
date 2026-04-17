@@ -1,0 +1,865 @@
+# ============================================================
+# Fake-BS Simulation Log
+# Format: [wall HH:MM:SS.mmm] [LEVEL] [sim=Xs] [Component    ] Message
+# Started: 2026-04-17 10:18:01
+# ============================================================
+
+[10:18:01.563] [INFO ] [sim=0.000s] [FakeBsSim       ] === Simulation starting ===
+[10:18:01.563] [INFO ] [sim=0.000s] [FakeBsSim       ] gridSize=5  numLegalEnb=25  isd=500m
+[10:18:01.563] [INFO ] [sim=0.000s] [FakeBsSim       ] numUe=200  simTime=60s
+[10:18:01.563] [INFO ] [sim=0.000s] [FakeBsSim       ] MeasReportConfig:  cellIdReporting=true  intervalSec=1s  maxReportCells=0 (all)
+[10:18:01.563] [INFO ] [sim=0.000s] [FakeBsSim       ] measurements.csv row limit=2000
+[10:18:01.563] [INFO ] [sim=0.000s] [FakeBsSim       ] fakeBS pos=(0,0)  impersonates ECGI=001-01-0000001  (fakeEci=1)  fakeTxPower=56dBm  lbsTxPower=46dBm  BW=25RBs
+[10:18:01.563] [INFO ] [sim=0.000s] [FakeBsSim       ] PLMN: MCC=001  MNC=01
+[10:18:01.563] [INFO ] [sim=0.000s] [FakeBsSim       ] outputDir=/output/fbs-zero-step3
+[10:18:01.582] [DEBUG] [sim=0.000s] [FakeBsSim       ] LTE devices installed.
+[10:18:01.582] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=1 ECGI=001-01-0000001 [legal] pos=(0,0,25) txPower=46dBm
+[10:18:01.582] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000001 pos=(0,0)
+[10:18:01.582] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=1  ECGI=001-01-0000001  pos=(0,0)
+[10:18:01.582] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=2 ECGI=001-01-0000002 [legal] pos=(500,0,25) txPower=46dBm
+[10:18:01.582] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000002 pos=(500,0)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=2  ECGI=001-01-0000002  pos=(500,0)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=3 ECGI=001-01-0000003 [legal] pos=(1000,0,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000003 pos=(1000,0)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=3  ECGI=001-01-0000003  pos=(1000,0)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=4 ECGI=001-01-0000004 [legal] pos=(1500,0,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000004 pos=(1500,0)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=4  ECGI=001-01-0000004  pos=(1500,0)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=5 ECGI=001-01-0000005 [legal] pos=(2000,0,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000005 pos=(2000,0)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=5  ECGI=001-01-0000005  pos=(2000,0)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=6 ECGI=001-01-0000006 [legal] pos=(0,500,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000006 pos=(0,500)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=6  ECGI=001-01-0000006  pos=(0,500)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=7 ECGI=001-01-0000007 [legal] pos=(500,500,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000007 pos=(500,500)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=7  ECGI=001-01-0000007  pos=(500,500)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=8 ECGI=001-01-0000008 [legal] pos=(1000,500,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000008 pos=(1000,500)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=8  ECGI=001-01-0000008  pos=(1000,500)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=9 ECGI=001-01-0000009 [legal] pos=(1500,500,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000009 pos=(1500,500)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=9  ECGI=001-01-0000009  pos=(1500,500)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=10 ECGI=001-01-0000010 [legal] pos=(2000,500,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000010 pos=(2000,500)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=10  ECGI=001-01-0000010  pos=(2000,500)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=11 ECGI=001-01-0000011 [legal] pos=(0,1000,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000011 pos=(0,1000)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=11  ECGI=001-01-0000011  pos=(0,1000)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=12 ECGI=001-01-0000012 [legal] pos=(500,1000,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000012 pos=(500,1000)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=12  ECGI=001-01-0000012  pos=(500,1000)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=13 ECGI=001-01-0000013 [legal] pos=(1000,1000,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000013 pos=(1000,1000)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=13  ECGI=001-01-0000013  pos=(1000,1000)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=14 ECGI=001-01-0000014 [legal] pos=(1500,1000,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000014 pos=(1500,1000)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=14  ECGI=001-01-0000014  pos=(1500,1000)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=15 ECGI=001-01-0000015 [legal] pos=(2000,1000,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000015 pos=(2000,1000)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=15  ECGI=001-01-0000015  pos=(2000,1000)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=16 ECGI=001-01-0000016 [legal] pos=(0,1500,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000016 pos=(0,1500)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=16  ECGI=001-01-0000016  pos=(0,1500)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=17 ECGI=001-01-0000017 [legal] pos=(500,1500,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000017 pos=(500,1500)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=17  ECGI=001-01-0000017  pos=(500,1500)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=18 ECGI=001-01-0000018 [legal] pos=(1000,1500,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000018 pos=(1000,1500)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=18  ECGI=001-01-0000018  pos=(1000,1500)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=19 ECGI=001-01-0000019 [legal] pos=(1500,1500,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000019 pos=(1500,1500)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=19  ECGI=001-01-0000019  pos=(1500,1500)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=20 ECGI=001-01-0000020 [legal] pos=(2000,1500,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000020 pos=(2000,1500)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=20  ECGI=001-01-0000020  pos=(2000,1500)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=21 ECGI=001-01-0000021 [legal] pos=(0,2000,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000021 pos=(0,2000)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=21  ECGI=001-01-0000021  pos=(0,2000)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=22 ECGI=001-01-0000022 [legal] pos=(500,2000,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000022 pos=(500,2000)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=22  ECGI=001-01-0000022  pos=(500,2000)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=23 ECGI=001-01-0000023 [legal] pos=(1000,2000,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000023 pos=(1000,2000)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=23  ECGI=001-01-0000023  pos=(1000,2000)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=24 ECGI=001-01-0000024 [legal] pos=(1500,2000,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000024 pos=(1500,2000)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=24  ECGI=001-01-0000024  pos=(1500,2000)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=25 ECGI=001-01-0000025 [legal] pos=(2000,2000,25) txPower=46dBm
+[10:18:01.583] [DEBUG] [sim=0.000s] [CcpcvDetector   ] RegisterPos: ECGI=001-01-0000025 pos=(2000,2000)
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] Legal eNB  cellId=25  ECGI=001-01-0000025  pos=(2000,2000)
+[10:18:01.583] [DEBUG] [sim=0.000s] [GlobalCellDB    ] registered cellId=26 ECGI=001-01-0000001 [FAKE] pos=(0,0,2) txPower=56dBm
+[10:18:01.583] [INFO ] [sim=0.000s] [FakeBsSim       ] FAKE eNB  cellId=26  ECGI=001-01-0000001  (impersonates legal ECGI=001-01-0000001)  pos=(0,0)  txPower=56dBm  (LBS txPower=46dBm)
+[10:18:01.626] [INFO ] [sim=0.000s] [FakeBsSim       ] Attaching 200 UEs to nearest legal eNB...
+[10:18:01.626] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=1 → legal eNB[15] ECGI=001-01-0000016 dist=232.0m
+[10:18:01.626] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=2 → legal eNB[8] ECGI=001-01-0000009 dist=153.8m
+[10:18:01.626] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=3 → legal eNB[23] ECGI=001-01-0000024 dist=241.3m
+[10:18:01.626] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=4 → legal eNB[8] ECGI=001-01-0000009 dist=58.7m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=5 → legal eNB[5] ECGI=001-01-0000006 dist=63.3m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=6 → legal eNB[14] ECGI=001-01-0000015 dist=286.9m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=7 → legal eNB[24] ECGI=001-01-0000025 dist=217.7m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=8 → legal eNB[8] ECGI=001-01-0000009 dist=91.2m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=9 → legal eNB[6] ECGI=001-01-0000007 dist=152.4m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=10 → legal eNB[21] ECGI=001-01-0000022 dist=329.5m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=11 → legal eNB[14] ECGI=001-01-0000015 dist=239.3m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=12 → legal eNB[0] ECGI=001-01-0000001 dist=134.3m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=13 → legal eNB[2] ECGI=001-01-0000003 dist=198.5m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=14 → legal eNB[15] ECGI=001-01-0000016 dist=237.1m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=15 → legal eNB[19] ECGI=001-01-0000020 dist=126.7m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=16 → legal eNB[17] ECGI=001-01-0000018 dist=241.8m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=17 → legal eNB[5] ECGI=001-01-0000006 dist=203.9m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=18 → legal eNB[20] ECGI=001-01-0000021 dist=81.3m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=19 → legal eNB[11] ECGI=001-01-0000012 dist=260.2m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=20 → legal eNB[7] ECGI=001-01-0000008 dist=175.1m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=21 → legal eNB[3] ECGI=001-01-0000004 dist=237.9m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=22 → legal eNB[10] ECGI=001-01-0000011 dist=259.3m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=23 → legal eNB[3] ECGI=001-01-0000004 dist=280.3m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=24 → legal eNB[10] ECGI=001-01-0000011 dist=273.3m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=25 → legal eNB[19] ECGI=001-01-0000020 dist=207.2m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=26 → legal eNB[21] ECGI=001-01-0000022 dist=180.3m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=27 → legal eNB[0] ECGI=001-01-0000001 dist=108.5m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=28 → legal eNB[6] ECGI=001-01-0000007 dist=238.9m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=29 → legal eNB[19] ECGI=001-01-0000020 dist=237.6m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=30 → legal eNB[3] ECGI=001-01-0000004 dist=135.7m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=31 → legal eNB[5] ECGI=001-01-0000006 dist=249.4m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=32 → legal eNB[24] ECGI=001-01-0000025 dist=137.5m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=33 → legal eNB[1] ECGI=001-01-0000002 dist=240.6m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=34 → legal eNB[17] ECGI=001-01-0000018 dist=235.1m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=35 → legal eNB[18] ECGI=001-01-0000019 dist=220.2m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=36 → legal eNB[20] ECGI=001-01-0000021 dist=26.7m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=37 → legal eNB[6] ECGI=001-01-0000007 dist=142.6m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=38 → legal eNB[2] ECGI=001-01-0000003 dist=220.9m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=39 → legal eNB[19] ECGI=001-01-0000020 dist=146.3m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=40 → legal eNB[6] ECGI=001-01-0000007 dist=198.7m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=41 → legal eNB[2] ECGI=001-01-0000003 dist=237.5m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=42 → legal eNB[0] ECGI=001-01-0000001 dist=194.5m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=43 → legal eNB[14] ECGI=001-01-0000015 dist=45.8m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=44 → legal eNB[11] ECGI=001-01-0000012 dist=270.9m
+[10:18:01.627] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=45 → legal eNB[3] ECGI=001-01-0000004 dist=138.7m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=46 → legal eNB[24] ECGI=001-01-0000025 dist=219.7m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=47 → legal eNB[0] ECGI=001-01-0000001 dist=220.9m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=48 → legal eNB[11] ECGI=001-01-0000012 dist=284.3m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=49 → legal eNB[19] ECGI=001-01-0000020 dist=24.6m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=50 → legal eNB[1] ECGI=001-01-0000002 dist=140.3m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=51 → legal eNB[9] ECGI=001-01-0000010 dist=274.4m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=52 → legal eNB[6] ECGI=001-01-0000007 dist=191.6m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=53 → legal eNB[2] ECGI=001-01-0000003 dist=194.0m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=54 → legal eNB[7] ECGI=001-01-0000008 dist=223.1m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=55 → legal eNB[15] ECGI=001-01-0000016 dist=232.1m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=56 → legal eNB[4] ECGI=001-01-0000005 dist=221.3m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=57 → legal eNB[2] ECGI=001-01-0000003 dist=327.3m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=58 → legal eNB[21] ECGI=001-01-0000022 dist=152.7m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=59 → legal eNB[2] ECGI=001-01-0000003 dist=331.3m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=60 → legal eNB[8] ECGI=001-01-0000009 dist=47.2m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=61 → legal eNB[5] ECGI=001-01-0000006 dist=163.5m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=62 → legal eNB[16] ECGI=001-01-0000017 dist=165.6m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=63 → legal eNB[22] ECGI=001-01-0000023 dist=193.1m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=64 → legal eNB[1] ECGI=001-01-0000002 dist=140.3m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=65 → legal eNB[24] ECGI=001-01-0000025 dist=222.1m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=66 → legal eNB[12] ECGI=001-01-0000013 dist=215.2m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=67 → legal eNB[18] ECGI=001-01-0000019 dist=241.7m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=68 → legal eNB[11] ECGI=001-01-0000012 dist=204.5m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=69 → legal eNB[17] ECGI=001-01-0000018 dist=256.6m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=70 → legal eNB[24] ECGI=001-01-0000025 dist=186.1m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=71 → legal eNB[6] ECGI=001-01-0000007 dist=209.5m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=72 → legal eNB[5] ECGI=001-01-0000006 dist=237.6m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=73 → legal eNB[16] ECGI=001-01-0000017 dist=233.7m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=74 → legal eNB[7] ECGI=001-01-0000008 dist=187.0m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=75 → legal eNB[24] ECGI=001-01-0000025 dist=250.8m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=76 → legal eNB[22] ECGI=001-01-0000023 dist=242.2m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=77 → legal eNB[3] ECGI=001-01-0000004 dist=129.4m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=78 → legal eNB[23] ECGI=001-01-0000024 dist=74.9m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=79 → legal eNB[5] ECGI=001-01-0000006 dist=231.7m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=80 → legal eNB[9] ECGI=001-01-0000010 dist=145.2m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=81 → legal eNB[17] ECGI=001-01-0000018 dist=226.2m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=82 → legal eNB[17] ECGI=001-01-0000018 dist=194.3m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=83 → legal eNB[19] ECGI=001-01-0000020 dist=115.6m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=84 → legal eNB[17] ECGI=001-01-0000018 dist=230.6m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=85 → legal eNB[22] ECGI=001-01-0000023 dist=147.6m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=86 → legal eNB[4] ECGI=001-01-0000005 dist=79.8m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=87 → legal eNB[0] ECGI=001-01-0000001 dist=250.8m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=88 → legal eNB[22] ECGI=001-01-0000023 dist=91.7m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=89 → legal eNB[5] ECGI=001-01-0000006 dist=212.7m
+[10:18:01.628] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=90 → legal eNB[19] ECGI=001-01-0000020 dist=317.5m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=91 → legal eNB[6] ECGI=001-01-0000007 dist=62.5m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=92 → legal eNB[15] ECGI=001-01-0000016 dist=91.2m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=93 → legal eNB[13] ECGI=001-01-0000014 dist=141.1m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=94 → legal eNB[16] ECGI=001-01-0000017 dist=86.7m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=95 → legal eNB[21] ECGI=001-01-0000022 dist=250.4m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=96 → legal eNB[16] ECGI=001-01-0000017 dist=191.4m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=97 → legal eNB[5] ECGI=001-01-0000006 dist=182.1m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=98 → legal eNB[20] ECGI=001-01-0000021 dist=200.6m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=99 → legal eNB[11] ECGI=001-01-0000012 dist=224.4m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=100 → legal eNB[7] ECGI=001-01-0000008 dist=281.7m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=101 → legal eNB[11] ECGI=001-01-0000012 dist=99.2m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=102 → legal eNB[10] ECGI=001-01-0000011 dist=100.9m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=103 → legal eNB[19] ECGI=001-01-0000020 dist=305.0m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=104 → legal eNB[14] ECGI=001-01-0000015 dist=207.0m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=105 → legal eNB[11] ECGI=001-01-0000012 dist=84.9m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=106 → legal eNB[22] ECGI=001-01-0000023 dist=340.6m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=107 → legal eNB[5] ECGI=001-01-0000006 dist=220.5m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=108 → legal eNB[4] ECGI=001-01-0000005 dist=64.1m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=109 → legal eNB[3] ECGI=001-01-0000004 dist=162.8m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=110 → legal eNB[23] ECGI=001-01-0000024 dist=71.2m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=111 → legal eNB[9] ECGI=001-01-0000010 dist=256.3m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=112 → legal eNB[24] ECGI=001-01-0000025 dist=183.6m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=113 → legal eNB[1] ECGI=001-01-0000002 dist=184.5m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=114 → legal eNB[20] ECGI=001-01-0000021 dist=254.9m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=115 → legal eNB[13] ECGI=001-01-0000014 dist=144.7m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=116 → legal eNB[4] ECGI=001-01-0000005 dist=201.5m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=117 → legal eNB[14] ECGI=001-01-0000015 dist=120.5m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=118 → legal eNB[23] ECGI=001-01-0000024 dist=196.9m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=119 → legal eNB[16] ECGI=001-01-0000017 dist=72.1m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=120 → legal eNB[1] ECGI=001-01-0000002 dist=97.3m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=121 → legal eNB[9] ECGI=001-01-0000010 dist=186.3m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=122 → legal eNB[21] ECGI=001-01-0000022 dist=197.0m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=123 → legal eNB[14] ECGI=001-01-0000015 dist=317.4m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=124 → legal eNB[21] ECGI=001-01-0000022 dist=235.2m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=125 → legal eNB[16] ECGI=001-01-0000017 dist=133.4m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=126 → legal eNB[5] ECGI=001-01-0000006 dist=274.1m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=127 → legal eNB[21] ECGI=001-01-0000022 dist=255.2m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=128 → legal eNB[5] ECGI=001-01-0000006 dist=86.7m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=129 → legal eNB[17] ECGI=001-01-0000018 dist=195.7m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=130 → legal eNB[24] ECGI=001-01-0000025 dist=210.6m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=131 → legal eNB[4] ECGI=001-01-0000005 dist=172.5m
+[10:18:01.629] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=132 → legal eNB[1] ECGI=001-01-0000002 dist=220.6m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=133 → legal eNB[21] ECGI=001-01-0000022 dist=203.5m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=134 → legal eNB[5] ECGI=001-01-0000006 dist=163.1m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=135 → legal eNB[10] ECGI=001-01-0000011 dist=320.3m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=136 → legal eNB[14] ECGI=001-01-0000015 dist=90.9m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=137 → legal eNB[0] ECGI=001-01-0000001 dist=79.2m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=138 → legal eNB[20] ECGI=001-01-0000021 dist=211.0m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=139 → legal eNB[23] ECGI=001-01-0000024 dist=106.1m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=140 → legal eNB[8] ECGI=001-01-0000009 dist=220.3m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=141 → legal eNB[14] ECGI=001-01-0000015 dist=224.9m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=142 → legal eNB[14] ECGI=001-01-0000015 dist=47.6m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=143 → legal eNB[19] ECGI=001-01-0000020 dist=282.0m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=144 → legal eNB[0] ECGI=001-01-0000001 dist=227.1m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=145 → legal eNB[24] ECGI=001-01-0000025 dist=243.7m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=146 → legal eNB[15] ECGI=001-01-0000016 dist=230.3m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=147 → legal eNB[6] ECGI=001-01-0000007 dist=150.4m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=148 → legal eNB[12] ECGI=001-01-0000013 dist=251.4m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=149 → legal eNB[22] ECGI=001-01-0000023 dist=328.8m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=150 → legal eNB[21] ECGI=001-01-0000022 dist=164.7m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=151 → legal eNB[9] ECGI=001-01-0000010 dist=208.1m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=152 → legal eNB[24] ECGI=001-01-0000025 dist=191.8m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=153 → legal eNB[18] ECGI=001-01-0000019 dist=183.8m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=154 → legal eNB[21] ECGI=001-01-0000022 dist=135.1m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=155 → legal eNB[6] ECGI=001-01-0000007 dist=268.1m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=156 → legal eNB[10] ECGI=001-01-0000011 dist=117.6m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=157 → legal eNB[3] ECGI=001-01-0000004 dist=145.3m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=158 → legal eNB[17] ECGI=001-01-0000018 dist=244.4m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=159 → legal eNB[4] ECGI=001-01-0000005 dist=230.8m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=160 → legal eNB[23] ECGI=001-01-0000024 dist=225.7m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=161 → legal eNB[20] ECGI=001-01-0000021 dist=58.5m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=162 → legal eNB[22] ECGI=001-01-0000023 dist=209.4m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=163 → legal eNB[3] ECGI=001-01-0000004 dist=295.0m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=164 → legal eNB[5] ECGI=001-01-0000006 dist=245.3m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=165 → legal eNB[3] ECGI=001-01-0000004 dist=239.6m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=166 → legal eNB[19] ECGI=001-01-0000020 dist=250.7m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=167 → legal eNB[12] ECGI=001-01-0000013 dist=169.3m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=168 → legal eNB[12] ECGI=001-01-0000013 dist=16.0m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=169 → legal eNB[7] ECGI=001-01-0000008 dist=290.8m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=170 → legal eNB[16] ECGI=001-01-0000017 dist=117.1m
+[10:18:01.630] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=171 → legal eNB[4] ECGI=001-01-0000005 dist=88.6m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=172 → legal eNB[5] ECGI=001-01-0000006 dist=306.2m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=173 → legal eNB[8] ECGI=001-01-0000009 dist=229.0m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=174 → legal eNB[2] ECGI=001-01-0000003 dist=11.4m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=175 → legal eNB[12] ECGI=001-01-0000013 dist=106.1m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=176 → legal eNB[14] ECGI=001-01-0000015 dist=214.0m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=177 → legal eNB[10] ECGI=001-01-0000011 dist=255.7m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=178 → legal eNB[17] ECGI=001-01-0000018 dist=137.3m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=179 → legal eNB[9] ECGI=001-01-0000010 dist=175.2m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=180 → legal eNB[22] ECGI=001-01-0000023 dist=110.7m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=181 → legal eNB[20] ECGI=001-01-0000021 dist=134.5m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=182 → legal eNB[15] ECGI=001-01-0000016 dist=242.7m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=183 → legal eNB[16] ECGI=001-01-0000017 dist=224.8m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=184 → legal eNB[2] ECGI=001-01-0000003 dist=194.2m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=185 → legal eNB[13] ECGI=001-01-0000014 dist=191.0m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=186 → legal eNB[17] ECGI=001-01-0000018 dist=307.7m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=187 → legal eNB[23] ECGI=001-01-0000024 dist=151.2m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=188 → legal eNB[3] ECGI=001-01-0000004 dist=102.2m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=189 → legal eNB[0] ECGI=001-01-0000001 dist=246.2m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=190 → legal eNB[1] ECGI=001-01-0000002 dist=154.0m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=191 → legal eNB[24] ECGI=001-01-0000025 dist=163.0m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=192 → legal eNB[17] ECGI=001-01-0000018 dist=252.9m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=193 → legal eNB[5] ECGI=001-01-0000006 dist=148.7m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=194 → legal eNB[8] ECGI=001-01-0000009 dist=276.5m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=195 → legal eNB[2] ECGI=001-01-0000003 dist=251.8m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=196 → legal eNB[24] ECGI=001-01-0000025 dist=130.7m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=197 → legal eNB[7] ECGI=001-01-0000008 dist=194.5m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=198 → legal eNB[12] ECGI=001-01-0000013 dist=249.1m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=199 → legal eNB[6] ECGI=001-01-0000007 dist=52.5m
+[10:18:01.631] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE IMSI=200 → legal eNB[24] ECGI=001-01-0000025 dist=186.5m
+[10:18:01.631] [INFO ] [sim=0.000s] [FakeBsSim       ] All 200 UEs attached to legal eNBs.
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UDP DL traffic: 200 flows, port=1234, 512B @100ms
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=30 → IMSI=1
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=31 → IMSI=2
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=32 → IMSI=3
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=33 → IMSI=4
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=34 → IMSI=5
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=35 → IMSI=6
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=36 → IMSI=7
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=37 → IMSI=8
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=38 → IMSI=9
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=39 → IMSI=10
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=40 → IMSI=11
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=41 → IMSI=12
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=42 → IMSI=13
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=43 → IMSI=14
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=44 → IMSI=15
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=45 → IMSI=16
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=46 → IMSI=17
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=47 → IMSI=18
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=48 → IMSI=19
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=49 → IMSI=20
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=50 → IMSI=21
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=51 → IMSI=22
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=52 → IMSI=23
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=53 → IMSI=24
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=54 → IMSI=25
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=55 → IMSI=26
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=56 → IMSI=27
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=57 → IMSI=28
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=58 → IMSI=29
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=59 → IMSI=30
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=60 → IMSI=31
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=61 → IMSI=32
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=62 → IMSI=33
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=63 → IMSI=34
+[10:18:01.634] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=64 → IMSI=35
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=65 → IMSI=36
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=66 → IMSI=37
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=67 → IMSI=38
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=68 → IMSI=39
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=69 → IMSI=40
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=70 → IMSI=41
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=71 → IMSI=42
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=72 → IMSI=43
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=73 → IMSI=44
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=74 → IMSI=45
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=75 → IMSI=46
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=76 → IMSI=47
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=77 → IMSI=48
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=78 → IMSI=49
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=79 → IMSI=50
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=80 → IMSI=51
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=81 → IMSI=52
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=82 → IMSI=53
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=83 → IMSI=54
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=84 → IMSI=55
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=85 → IMSI=56
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=86 → IMSI=57
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=87 → IMSI=58
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=88 → IMSI=59
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=89 → IMSI=60
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=90 → IMSI=61
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=91 → IMSI=62
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=92 → IMSI=63
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=93 → IMSI=64
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=94 → IMSI=65
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=95 → IMSI=66
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=96 → IMSI=67
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=97 → IMSI=68
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=98 → IMSI=69
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=99 → IMSI=70
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=100 → IMSI=71
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=101 → IMSI=72
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=102 → IMSI=73
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=103 → IMSI=74
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=104 → IMSI=75
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=105 → IMSI=76
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=106 → IMSI=77
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=107 → IMSI=78
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=108 → IMSI=79
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=109 → IMSI=80
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=110 → IMSI=81
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=111 → IMSI=82
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=112 → IMSI=83
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=113 → IMSI=84
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=114 → IMSI=85
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=115 → IMSI=86
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=116 → IMSI=87
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=117 → IMSI=88
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=118 → IMSI=89
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=119 → IMSI=90
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=120 → IMSI=91
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=121 → IMSI=92
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=122 → IMSI=93
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=123 → IMSI=94
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=124 → IMSI=95
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=125 → IMSI=96
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=126 → IMSI=97
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=127 → IMSI=98
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=128 → IMSI=99
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=129 → IMSI=100
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=130 → IMSI=101
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=131 → IMSI=102
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=132 → IMSI=103
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=133 → IMSI=104
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=134 → IMSI=105
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=135 → IMSI=106
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=136 → IMSI=107
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=137 → IMSI=108
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=138 → IMSI=109
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=139 → IMSI=110
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=140 → IMSI=111
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=141 → IMSI=112
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=142 → IMSI=113
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=143 → IMSI=114
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=144 → IMSI=115
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=145 → IMSI=116
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=146 → IMSI=117
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=147 → IMSI=118
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=148 → IMSI=119
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=149 → IMSI=120
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=150 → IMSI=121
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=151 → IMSI=122
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=152 → IMSI=123
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=153 → IMSI=124
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=154 → IMSI=125
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=155 → IMSI=126
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=156 → IMSI=127
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=157 → IMSI=128
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=158 → IMSI=129
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=159 → IMSI=130
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=160 → IMSI=131
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=161 → IMSI=132
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=162 → IMSI=133
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=163 → IMSI=134
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=164 → IMSI=135
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=165 → IMSI=136
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=166 → IMSI=137
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=167 → IMSI=138
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=168 → IMSI=139
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=169 → IMSI=140
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=170 → IMSI=141
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=171 → IMSI=142
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=172 → IMSI=143
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=173 → IMSI=144
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=174 → IMSI=145
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=175 → IMSI=146
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=176 → IMSI=147
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=177 → IMSI=148
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=178 → IMSI=149
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=179 → IMSI=150
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=180 → IMSI=151
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=181 → IMSI=152
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=182 → IMSI=153
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=183 → IMSI=154
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=184 → IMSI=155
+[10:18:01.635] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=185 → IMSI=156
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=186 → IMSI=157
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=187 → IMSI=158
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=188 → IMSI=159
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=189 → IMSI=160
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=190 → IMSI=161
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=191 → IMSI=162
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=192 → IMSI=163
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=193 → IMSI=164
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=194 → IMSI=165
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=195 → IMSI=166
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=196 → IMSI=167
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=197 → IMSI=168
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=198 → IMSI=169
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=199 → IMSI=170
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=200 → IMSI=171
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=201 → IMSI=172
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=202 → IMSI=173
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=203 → IMSI=174
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=204 → IMSI=175
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=205 → IMSI=176
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=206 → IMSI=177
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=207 → IMSI=178
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=208 → IMSI=179
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=209 → IMSI=180
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=210 → IMSI=181
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=211 → IMSI=182
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=212 → IMSI=183
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=213 → IMSI=184
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=214 → IMSI=185
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=215 → IMSI=186
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=216 → IMSI=187
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=217 → IMSI=188
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=218 → IMSI=189
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=219 → IMSI=190
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=220 → IMSI=191
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=221 → IMSI=192
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=222 → IMSI=193
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=223 → IMSI=194
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=224 → IMSI=195
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=225 → IMSI=196
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=226 → IMSI=197
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=227 → IMSI=198
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=228 → IMSI=199
+[10:18:01.636] [DEBUG] [sim=0.000s] [FakeBsSim       ] UE map: nodeId=229 → IMSI=200
+[10:18:01.636] [INFO ] [sim=0.000s] [FakeBsSim       ] UE map built: 200 entries
+[10:18:01.636] [INFO ] [sim=0.000s] [MeasureColl     ] Measurements CSV opened: /output/fbs-zero-step3/measurements.csv
+[10:18:01.636] [INFO ] [sim=0.000s] [MeasureColl     ] Fake-served UEs CSV opened: /output/fbs-zero-step3/fake_served_ues.csv
+[10:18:01.636] [INFO ] [sim=0.000s] [GlobalCellDB    ] Cell database exported → /output/fbs-zero-step3/cell_database.csv  (26 cells)
+[10:18:01.636] [INFO ] [sim=0.000s] [GlobalCellDB    ] Legal cell map exported → /output/fbs-zero-step3/legal_cell_map.csv  (25 cells)
+[10:18:01.636] [INFO ] [sim=0.000s] [FakeBsSim       ] CC-PCV config: area=[-250..2250]x[-250..2250]m  grid=50m  threshold=1000  maxSampPerGroup=500
+[10:18:01.636] [INFO ] [sim=0.000s] [FakeBsSim       ] Measurement reporting scheduled every 1s  (expected ~12000 UE reports)
+[10:18:01.636] [INFO ] [sim=0.000s] [FakeBsSim       ] === Simulator::Run() starting ===  legalEnbs=25  fakeEnbs=1 (ECGI=001-01-0000001)  UEs=200  duration=60s
+[10:18:23.892] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s  generating measurement reports  cellIdReporting=true
+[10:18:23.892] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=1 ECGI=001-01-0000001 FAKE signal dominant rsrp=-71.2dBm
+[10:18:23.892] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=1 pos=(-192.5,1624.5) servECGI=001-01-0000021 rsrp=-59.0dBm ta=5 ecgis=25
+[10:18:23.892] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=2 ECGI=001-01-0000001 FAKE signal dominant rsrp=-86.8dBm
+[10:18:23.892] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=2 pos=(1468.5,659.5) servECGI=001-01-0000009 rsrp=-50.2dBm ta=2 ecgis=25
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=3 pos=(1665.0,1822.8) servECGI=001-01-0000024 rsrp=-49.7dBm ta=3 ecgis=25
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=4 ECGI=001-01-0000001 FAKE signal dominant rsrp=-72.1dBm
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=4 pos=(1433.3,474.7) servECGI=001-01-0000009 rsrp=-49.4dBm ta=1 ecgis=25
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=5 ECGI=001-01-0000001 FAKE signal dominant rsrp=-52.6dBm
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=5 pos=(62.5,485.6) servECGI=001-01-0000006 rsrp=-27.1dBm ta=1 ecgis=25
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=6 pos=(2153.7,762.6) servECGI=001-01-0000010 rsrp=-67.5dBm ta=4 ecgis=25
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=7 pos=(1875.0,1819.1) servECGI=001-01-0000020 rsrp=-56.1dBm ta=4 ecgis=25
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=8 ECGI=001-01-0000001 FAKE signal dominant rsrp=-75.2dBm
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=8 pos=(1424.2,553.6) servECGI=001-01-0000009 rsrp=-43.8dBm ta=1 ecgis=25
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=9 ECGI=001-01-0000001 FAKE signal dominant rsrp=-81.2dBm
+[10:18:23.893] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=9 pos=(562.9,645.5) servECGI=001-01-0000012 rsrp=-45.4dBm ta=5 ecgis=25
+[10:18:23.896] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=10 pos=(747.9,2211.4) servECGI=001-01-0000022 rsrp=-55.6dBm ta=4 ecgis=25
+[10:18:23.896] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=11 ECGI=001-01-0000001 FAKE signal dominant rsrp=-81.7dBm
+[10:18:23.896] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=11 pos=(1764.9,970.3) servECGI=001-01-0000015 rsrp=-52.1dBm ta=3 ecgis=25
+[10:18:23.896] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=12 ECGI=001-01-0000001 FAKE signal dominant rsrp=-41.5dBm
+[10:18:23.896] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=12 fake BS is serving (ECGI=001-01-0000001) rsrp=-41.5dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.896] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=13 ECGI=001-01-0000001 FAKE signal dominant rsrp=-54.3dBm
+[10:18:23.896] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=13 fake BS is serving (ECGI=001-01-0000001) rsrp=-54.3dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.896] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=14 ECGI=001-01-0000001 FAKE signal dominant rsrp=-71.4dBm
+[10:18:23.897] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=14 pos=(-1.7,1259.5) servECGI=001-01-0000016 rsrp=-50.3dBm ta=3 ecgis=25
+[10:18:23.897] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=15 pos=(1906.5,1411.2) servECGI=001-01-0000020 rsrp=-51.3dBm ta=2 ecgis=25
+[10:18:23.897] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=16 ECGI=001-01-0000001 FAKE signal dominant rsrp=-70.5dBm
+[10:18:23.897] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=16 pos=(836.4,1321.7) servECGI=001-01-0000012 rsrp=-64.1dBm ta=6 ecgis=25
+[10:18:23.897] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=17 pos=(-190.5,438.9) servECGI=001-01-0000001 rsrp=-49.7dBm ta=6 ecgis=25
+[10:18:23.897] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=18 ECGI=001-01-0000001 FAKE signal dominant rsrp=-77.7dBm
+[10:18:23.897] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=18 pos=(-70.8,1969.0) servECGI=001-01-0000021 rsrp=-56.9dBm ta=1 ecgis=25
+[10:18:23.897] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=19 ECGI=001-01-0000001 FAKE signal dominant rsrp=-75.0dBm
+[10:18:23.897] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=19 pos=(292.4,1154.2) servECGI=001-01-0000008 rsrp=-59.9dBm ta=12 ecgis=25
+[10:18:23.898] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=20 pos=(1182.4,507.2) servECGI=001-01-0000014 rsrp=-57.0dBm ta=8 ecgis=25
+[10:18:23.898] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=21 ECGI=001-01-0000001 FAKE signal dominant rsrp=-70.6dBm
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=21 pos=(1281.2,-90.8) servECGI=001-01-0000004 rsrp=-50.1dBm ta=3 ecgis=25
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=22 ECGI=001-01-0000001 FAKE signal dominant rsrp=-70.6dBm
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=22 pos=(-187.1,829.3) servECGI=001-01-0000011 rsrp=-66.3dBm ta=3 ecgis=25
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=23 ECGI=001-01-0000001 FAKE signal dominant rsrp=-76.2dBm
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=23 pos=(1342.8,-229.4) servECGI=001-01-0000003 rsrp=-56.8dBm ta=5 ecgis=25
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=24 pos=(165.0,1218.8) servECGI=001-01-0000017 rsrp=-61.8dBm ta=6 ecgis=25
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=25 pos=(2177.4,1597.5) servECGI=001-01-0000020 rsrp=-38.5dBm ta=3 ecgis=25
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=26 ECGI=001-01-0000001 FAKE signal dominant rsrp=-81.2dBm
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=26 pos=(350.9,2090.5) servECGI=001-01-0000022 rsrp=-52.5dBm ta=2 ecgis=25
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=27 ECGI=001-01-0000001 FAKE signal dominant rsrp=-46.9dBm
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=27 fake BS is serving (ECGI=001-01-0000001) rsrp=-46.9dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.899] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=28 ECGI=001-01-0000001 FAKE signal dominant rsrp=-65.3dBm
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=28 pos=(655.0,319.7) servECGI=001-01-0000007 rsrp=-57.2dBm ta=3 ecgis=25
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=29 ECGI=001-01-0000001 FAKE signal dominant rsrp=-87.1dBm
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=29 pos=(2089.4,1716.1) servECGI=001-01-0000020 rsrp=-42.9dBm ta=3 ecgis=25
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=30 ECGI=001-01-0000001 FAKE signal dominant rsrp=-76.7dBm
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=30 pos=(1482.9,-125.3) servECGI=001-01-0000004 rsrp=-49.0dBm ta=2 ecgis=25
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=31 ECGI=001-01-0000001 FAKE signal dominant rsrp=-44.4dBm
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=31 fake BS is serving (ECGI=001-01-0000001) rsrp=-44.4dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=32 ECGI=001-01-0000001 FAKE signal dominant rsrp=-94.4dBm
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=32 pos=(1975.1,2129.6) servECGI=001-01-0000025 rsrp=-51.2dBm ta=2 ecgis=25
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=33 pos=(276.9,80.0) servECGI=001-01-0000002 rsrp=-59.8dBm ta=3 ecgis=25
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=34 ECGI=001-01-0000001 FAKE signal dominant rsrp=-84.1dBm
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=34 pos=(771.0,1517.1) servECGI=001-01-0000018 rsrp=-51.7dBm ta=3 ecgis=25
+[10:18:23.900] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=35 ECGI=001-01-0000001 FAKE signal dominant rsrp=-75.6dBm
+[10:18:23.901] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=35 pos=(1703.2,1414.1) servECGI=001-01-0000019 rsrp=-64.7dBm ta=3 ecgis=25
+[10:18:23.901] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=36 pos=(39.2,2005.9) servECGI=001-01-0000021 rsrp=-25.8dBm ta=1 ecgis=25
+[10:18:23.901] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=37 ECGI=001-01-0000001 FAKE signal dominant rsrp=-61.6dBm
+[10:18:23.901] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=37 pos=(617.6,419.4) servECGI=001-01-0000007 rsrp=-45.3dBm ta=2 ecgis=25
+[10:18:23.901] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=38 ECGI=001-01-0000001 FAKE signal dominant rsrp=-76.7dBm
+[10:18:23.901] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=38 pos=(912.3,204.6) servECGI=001-01-0000003 rsrp=-55.1dBm ta=3 ecgis=25
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=39 pos=(1858.1,1552.4) servECGI=001-01-0000020 rsrp=-44.5dBm ta=2 ecgis=25
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=40 ECGI=001-01-0000001 FAKE signal dominant rsrp=-48.4dBm
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=40 fake BS is serving (ECGI=001-01-0000001) rsrp=-48.4dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=41 ECGI=001-01-0000001 FAKE signal dominant rsrp=-73.4dBm
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=41 pos=(766.4,-15.9) servECGI=001-01-0000003 rsrp=-53.3dBm ta=3 ecgis=25
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=42 ECGI=001-01-0000001 FAKE signal dominant rsrp=-54.0dBm
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=42 fake BS is serving (ECGI=001-01-0000001) rsrp=-54.0dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=43 ECGI=001-01-0000001 FAKE signal dominant rsrp=-85.2dBm
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=43 pos=(1976.9,956.0) servECGI=001-01-0000015 rsrp=-34.6dBm ta=1 ecgis=25
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=44 pos=(301.5,1170.3) servECGI=001-01-0000012 rsrp=-53.9dBm ta=3 ecgis=25
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=45 ECGI=001-01-0000001 FAKE signal dominant rsrp=-82.0dBm
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=45 pos=(1530.0,139.1) servECGI=001-01-0000004 rsrp=-49.0dBm ta=2 ecgis=25
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=46 ECGI=001-01-0000001 FAKE signal dominant rsrp=-94.4dBm
+[10:18:23.902] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=46 pos=(2173.2,1868.2) servECGI=001-01-0000025 rsrp=-53.8dBm ta=3 ecgis=25
+[10:18:23.903] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=47 pos=(217.8,-41.1) servECGI=001-01-0000001 rsrp=-49.7dBm ta=3 ecgis=25
+[10:18:23.903] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=48 ECGI=001-01-0000001 FAKE signal dominant rsrp=-72.4dBm
+[10:18:23.903] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=48 pos=(698.5,796.4) servECGI=001-01-0000013 rsrp=-55.8dBm ta=5 ecgis=25
+[10:18:23.903] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=49 pos=(2000.3,1526.9) servECGI=001-01-0000020 rsrp=-16.2dBm ta=0 ecgis=25
+[10:18:23.903] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=50 ECGI=001-01-0000001 FAKE signal dominant rsrp=-68.3dBm
+[10:18:23.903] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=50 pos=(614.8,-72.3) servECGI=001-01-0000002 rsrp=-46.8dBm ta=2 ecgis=25
+[10:18:23.903] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=51 ECGI=001-01-0000001 FAKE signal dominant rsrp=-79.9dBm
+[10:18:23.903] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=51 pos=(1752.2,366.6) servECGI=001-01-0000010 rsrp=-51.1dBm ta=4 ecgis=25
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=52 pos=(406.7,331.9) servECGI=001-01-0000003 rsrp=-54.4dBm ta=9 ecgis=25
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=53 ECGI=001-01-0000001 FAKE signal dominant rsrp=-63.9dBm
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=53 pos=(805.7,18.8) servECGI=001-01-0000003 rsrp=-48.9dBm ta=3 ecgis=25
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=54 ECGI=001-01-0000001 FAKE signal dominant rsrp=-86.5dBm
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=54 pos=(1101.2,308.7) servECGI=001-01-0000010 rsrp=-58.7dBm ta=12 ecgis=25
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=55 ECGI=001-01-0000001 FAKE signal dominant rsrp=-90.1dBm
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=55 pos=(185.6,1343.3) servECGI=001-01-0000011 rsrp=-50.3dBm ta=5 ecgis=25
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=56 ECGI=001-01-0000001 FAKE signal dominant rsrp=-72.6dBm
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=56 pos=(2185.2,116.1) servECGI=001-01-0000005 rsrp=-56.9dBm ta=3 ecgis=25
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=57 ECGI=001-01-0000001 FAKE signal dominant rsrp=-65.6dBm
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=57 fake BS is serving (ECGI=001-01-0000001) rsrp=-65.6dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.904] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=58 ECGI=001-01-0000001 FAKE signal dominant rsrp=-91.5dBm
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=58 pos=(387.1,2085.9) servECGI=001-01-0000022 rsrp=-50.5dBm ta=2 ecgis=25
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=59 ECGI=001-01-0000001 FAKE signal dominant rsrp=-61.3dBm
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=59 pos=(774.3,-238.9) servECGI=001-01-0000002 rsrp=-56.8dBm ta=5 ecgis=25
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=60 ECGI=001-01-0000001 FAKE signal dominant rsrp=-69.6dBm
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=60 pos=(1460.7,532.8) servECGI=001-01-0000009 rsrp=-31.2dBm ta=1 ecgis=25
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=61 ECGI=001-01-0000001 FAKE signal dominant rsrp=-67.0dBm
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=61 pos=(-116.8,609.2) servECGI=001-01-0000007 rsrp=-59.6dBm ta=8 ecgis=25
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=62 ECGI=001-01-0000001 FAKE signal dominant rsrp=-95.2dBm
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=62 pos=(666.5,1522.2) servECGI=001-01-0000017 rsrp=-55.7dBm ta=2 ecgis=25
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=63 ECGI=001-01-0000001 FAKE signal dominant rsrp=-83.3dBm
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=63 pos=(1186.9,1960.4) servECGI=001-01-0000023 rsrp=-54.9dBm ta=2 ecgis=25
+[10:18:23.905] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=64 ECGI=001-01-0000001 FAKE signal dominant rsrp=-56.7dBm
+[10:18:23.906] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=64 pos=(584.7,-110.9) servECGI=001-01-0000002 rsrp=-44.3dBm ta=2 ecgis=25
+[10:18:23.906] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=65 ECGI=001-01-0000001 FAKE signal dominant rsrp=-81.1dBm
+[10:18:23.906] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=65 pos=(1901.3,2190.2) servECGI=001-01-0000025 rsrp=-51.8dBm ta=3 ecgis=25
+[10:18:23.906] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=66 ECGI=001-01-0000001 FAKE signal dominant rsrp=-66.3dBm
+[10:18:23.906] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=66 pos=(939.3,791.0) servECGI=001-01-0000013 rsrp=-47.6dBm ta=3 ecgis=25
+[10:18:23.906] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=67 ECGI=001-01-0000001 FAKE signal dominant rsrp=-68.2dBm
+[10:18:23.906] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=67 pos=(1405.5,1709.0) servECGI=001-01-0000019 rsrp=-59.1dBm ta=3 ecgis=25
+[10:18:23.906] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=68 ECGI=001-01-0000001 FAKE signal dominant rsrp=-74.2dBm
+[10:18:23.906] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=68 pos=(329.6,896.2) servECGI=001-01-0000012 rsrp=-38.2dBm ta=3 ecgis=25
+[10:18:23.906] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=69 ECGI=001-01-0000001 FAKE signal dominant rsrp=-81.7dBm
+[10:18:23.907] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=69 pos=(1070.1,1736.3) servECGI=001-01-0000018 rsrp=-43.0dBm ta=3 ecgis=25
+[10:18:23.907] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=70 ECGI=001-01-0000001 FAKE signal dominant rsrp=-83.1dBm
+[10:18:23.907] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=70 pos=(1812.7,2024.2) servECGI=001-01-0000025 rsrp=-56.3dBm ta=2 ecgis=25
+[10:18:23.907] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=71 ECGI=001-01-0000001 FAKE signal dominant rsrp=-66.2dBm
+[10:18:23.907] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=71 pos=(486.1,710.6) servECGI=001-01-0000007 rsrp=-51.0dBm ta=3 ecgis=25
+[10:18:23.907] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=72 ECGI=001-01-0000001 FAKE signal dominant rsrp=-45.9dBm
+[10:18:23.907] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=72 fake BS is serving (ECGI=001-01-0000001) rsrp=-45.9dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.907] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=73 pos=(334.3,1655.5) servECGI=001-01-0000017 rsrp=-55.4dBm ta=3 ecgis=25
+[10:18:23.907] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=74 pos=(833.0,418.2) servECGI=001-01-0000008 rsrp=-49.6dBm ta=2 ecgis=25
+[10:18:23.908] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=75 pos=(1893.6,2228.2) servECGI=001-01-0000020 rsrp=-55.9dBm ta=9 ecgis=25
+[10:18:23.908] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=76 pos=(803.8,1845.8) servECGI=001-01-0000023 rsrp=-51.5dBm ta=3 ecgis=25
+[10:18:23.908] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=77 ECGI=001-01-0000001 FAKE signal dominant rsrp=-85.1dBm
+[10:18:23.908] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=77 pos=(1616.5,-39.6) servECGI=001-01-0000004 rsrp=-47.9dBm ta=2 ecgis=25
+[10:18:23.908] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=78 ECGI=001-01-0000001 FAKE signal dominant rsrp=-83.8dBm
+[10:18:23.908] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=78 pos=(1456.8,1930.5) servECGI=001-01-0000024 rsrp=-40.5dBm ta=1 ecgis=25
+[10:18:23.908] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=79 ECGI=001-01-0000001 FAKE signal dominant rsrp=-72.0dBm
+[10:18:23.908] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=79 pos=(-229.9,515.7) servECGI=001-01-0000006 rsrp=-67.5dBm ta=3 ecgis=25
+[10:18:23.909] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=80 pos=(2111.3,402.4) servECGI=001-01-0000010 rsrp=-40.8dBm ta=2 ecgis=25
+[10:18:23.909] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=81 ECGI=001-01-0000001 FAKE signal dominant rsrp=-78.1dBm
+[10:18:23.909] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=81 pos=(1058.0,1274.0) servECGI=001-01-0000018 rsrp=-59.8dBm ta=3 ecgis=25
+[10:18:23.909] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=82 pos=(978.4,1315.2) servECGI=001-01-0000013 rsrp=-54.3dBm ta=4 ecgis=25
+[10:18:23.909] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=83 pos=(2008.2,1614.6) servECGI=001-01-0000020 rsrp=-40.1dBm ta=1 ecgis=25
+[10:18:23.909] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=84 ECGI=001-01-0000001 FAKE signal dominant rsrp=-65.5dBm
+[10:18:23.909] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=84 pos=(1103.1,1693.7) servECGI=001-01-0000018 rsrp=-63.8dBm ta=3 ecgis=25
+[10:18:23.909] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=85 pos=(1116.1,2072.0) servECGI=001-01-0000023 rsrp=-38.0dBm ta=2 ecgis=25
+[10:18:23.909] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=86 ECGI=001-01-0000001 FAKE signal dominant rsrp=-81.8dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=86 pos=(2041.5,-62.3) servECGI=001-01-0000005 rsrp=-40.4dBm ta=1 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=87 ECGI=001-01-0000001 FAKE signal dominant rsrp=-58.8dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=87 pos=(204.4,166.9) servECGI=001-01-0000007 rsrp=-57.4dBm ta=6 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=88 ECGI=001-01-0000001 FAKE signal dominant rsrp=-89.2dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=88 pos=(957.4,2065.6) servECGI=001-01-0000023 rsrp=-46.7dBm ta=1 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=89 pos=(-116.8,340.2) servECGI=001-01-0000001 rsrp=-48.4dBm ta=5 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=90 ECGI=001-01-0000001 FAKE signal dominant rsrp=-77.5dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=90 pos=(1744.0,1698.1) servECGI=001-01-0000019 rsrp=-61.3dBm ta=4 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=91 ECGI=001-01-0000001 FAKE signal dominant rsrp=-58.2dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=91 pos=(556.6,473.4) servECGI=001-01-0000007 rsrp=-27.9dBm ta=1 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=92 ECGI=001-01-0000001 FAKE signal dominant rsrp=-71.8dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=92 pos=(-48.8,1574.0) servECGI=001-01-0000016 rsrp=-32.7dBm ta=1 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=93 ECGI=001-01-0000001 FAKE signal dominant rsrp=-80.3dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=93 pos=(1631.9,1019.9) servECGI=001-01-0000014 rsrp=-42.7dBm ta=2 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=94 ECGI=001-01-0000001 FAKE signal dominant rsrp=-72.6dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=94 pos=(594.8,1481.7) servECGI=001-01-0000017 rsrp=-55.5dBm ta=1 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=95 ECGI=001-01-0000001 FAKE signal dominant rsrp=-82.5dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=95 pos=(660.8,1801.9) servECGI=001-01-0000017 rsrp=-56.9dBm ta=4 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=96 ECGI=001-01-0000001 FAKE signal dominant rsrp=-76.4dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=96 pos=(688.2,1499.8) servECGI=001-01-0000017 rsrp=-60.2dBm ta=2 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=97 ECGI=001-01-0000001 FAKE signal dominant rsrp=-60.0dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=97 pos=(59.2,674.3) servECGI=001-01-0000006 rsrp=-57.5dBm ta=2 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=98 ECGI=001-01-0000001 FAKE signal dominant rsrp=-77.4dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=98 pos=(215.4,2003.4) servECGI=001-01-0000022 rsrp=-66.1dBm ta=4 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=99 ECGI=001-01-0000001 FAKE signal dominant rsrp=-70.7dBm
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=99 pos=(600.1,802.6) servECGI=001-01-0000012 rsrp=-58.9dBm ta=3 ecgis=25
+[10:18:23.910] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=100 ECGI=001-01-0000001 FAKE signal dominant rsrp=-87.7dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=100 pos=(835.9,284.9) servECGI=001-01-0000008 rsrp=-54.3dBm ta=3 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=101 ECGI=001-01-0000001 FAKE signal dominant rsrp=-82.6dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=101 pos=(535.1,1098.0) servECGI=001-01-0000012 rsrp=-48.8dBm ta=1 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=102 ECGI=001-01-0000001 FAKE signal dominant rsrp=-75.4dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=102 pos=(-84.8,961.3) servECGI=001-01-0000011 rsrp=-46.2dBm ta=1 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=103 ECGI=001-01-0000001 FAKE signal dominant rsrp=-94.3dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=103 pos=(1756.1,1689.5) servECGI=001-01-0000024 rsrp=-56.2dBm ta=5 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=104 pos=(1848.5,859.7) servECGI=001-01-0000014 rsrp=-53.1dBm ta=5 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=105 ECGI=001-01-0000001 FAKE signal dominant rsrp=-60.2dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=105 pos=(587.3,1027.3) servECGI=001-01-0000012 rsrp=-52.3dBm ta=1 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=106 ECGI=001-01-0000001 FAKE signal dominant rsrp=-89.3dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=106 pos=(1236.9,2231.4) servECGI=001-01-0000022 rsrp=-58.2dBm ta=10 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=107 ECGI=001-01-0000001 FAKE signal dominant rsrp=-59.0dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=107 pos=(228.3,509.6) servECGI=001-01-0000006 rsrp=-42.6dBm ta=3 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=108 ECGI=001-01-0000001 FAKE signal dominant rsrp=-84.5dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=108 pos=(1929.5,21.7) servECGI=001-01-0000005 rsrp=-37.3dBm ta=1 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=109 ECGI=001-01-0000001 FAKE signal dominant rsrp=-77.3dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=109 pos=(1649.7,-57.1) servECGI=001-01-0000005 rsrp=-51.2dBm ta=5 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=110 ECGI=001-01-0000001 FAKE signal dominant rsrp=-84.1dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=110 pos=(1507.4,2068.3) servECGI=001-01-0000024 rsrp=-37.4dBm ta=1 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=111 ECGI=001-01-0000001 FAKE signal dominant rsrp=-82.7dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=111 pos=(1743.8,569.6) servECGI=001-01-0000010 rsrp=-53.2dBm ta=3 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=112 ECGI=001-01-0000001 FAKE signal dominant rsrp=-97.5dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=112 pos=(2133.7,2105.5) servECGI=001-01-0000025 rsrp=-46.4dBm ta=2 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=113 ECGI=001-01-0000001 FAKE signal dominant rsrp=-72.7dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=113 pos=(490.0,183.4) servECGI=001-01-0000002 rsrp=-51.5dBm ta=2 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=114 pos=(-121.6,1773.6) servECGI=001-01-0000016 rsrp=-58.3dBm ta=4 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=115 pos=(1548.7,1129.0) servECGI=001-01-0000020 rsrp=-61.0dBm ta=7 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=116 ECGI=001-01-0000001 FAKE signal dominant rsrp=-81.4dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=116 pos=(1880.2,164.4) servECGI=001-01-0000004 rsrp=-50.2dBm ta=5 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=117 pos=(2079.2,1085.7) servECGI=001-01-0000015 rsrp=-57.0dBm ta=2 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=118 pos=(1498.6,1798.4) servECGI=001-01-0000018 rsrp=-62.8dBm ta=7 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=119 ECGI=001-01-0000001 FAKE signal dominant rsrp=-80.6dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=119 pos=(432.5,1468.7) servECGI=001-01-0000017 rsrp=-35.6dBm ta=1 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=120 ECGI=001-01-0000001 FAKE signal dominant rsrp=-61.7dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=120 pos=(578.4,-55.6) servECGI=001-01-0000002 rsrp=-48.9dBm ta=1 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=121 ECGI=001-01-0000001 FAKE signal dominant rsrp=-76.2dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=121 pos=(2072.2,670.1) servECGI=001-01-0000015 rsrp=-59.1dBm ta=4 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=122 ECGI=001-01-0000001 FAKE signal dominant rsrp=-71.9dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=122 pos=(553.9,1808.5) servECGI=001-01-0000017 rsrp=-45.6dBm ta=4 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=123 ECGI=001-01-0000001 FAKE signal dominant rsrp=-77.9dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=123 pos=(1775.8,1227.0) servECGI=001-01-0000015 rsrp=-57.0dBm ta=4 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=124 pos=(370.6,2191.9) servECGI=001-01-0000022 rsrp=-55.2dBm ta=3 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=125 ECGI=001-01-0000001 FAKE signal dominant rsrp=-83.5dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=125 pos=(582.2,1395.1) servECGI=001-01-0000017 rsrp=-42.6dBm ta=2 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=126 ECGI=001-01-0000001 FAKE signal dominant rsrp=-67.4dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=126 pos=(-224.9,659.1) servECGI=001-01-0000006 rsrp=-59.3dBm ta=4 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=127 ECGI=001-01-0000001 FAKE signal dominant rsrp=-84.9dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=127 pos=(585.4,2225.7) servECGI=001-01-0000022 rsrp=-63.4dBm ta=3 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=128 pos=(9.6,412.2) servECGI=001-01-0000006 rsrp=-33.4dBm ta=1 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=129 ECGI=001-01-0000001 FAKE signal dominant rsrp=-87.9dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=129 pos=(1141.8,1369.8) servECGI=001-01-0000019 rsrp=-52.7dBm ta=5 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=130 ECGI=001-01-0000001 FAKE signal dominant rsrp=-97.4dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=130 pos=(2156.3,2136.7) servECGI=001-01-0000025 rsrp=-65.1dBm ta=3 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=131 ECGI=001-01-0000001 FAKE signal dominant rsrp=-79.6dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=131 pos=(1864.6,-90.8) servECGI=001-01-0000005 rsrp=-61.6dBm ta=2 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=132 ECGI=001-01-0000001 FAKE signal dominant rsrp=-61.5dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=132 pos=(715.0,72.4) servECGI=001-01-0000009 rsrp=-60.5dBm ta=11 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=133 ECGI=001-01-0000001 FAKE signal dominant rsrp=-83.3dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=133 pos=(452.6,1801.9) servECGI=001-01-0000022 rsrp=-42.6dBm ta=3 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=134 ECGI=001-01-0000001 FAKE signal dominant rsrp=-59.1dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=134 pos=(124.5,392.9) servECGI=001-01-0000012 rsrp=-56.4dBm ta=9 ecgis=25
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=135 ECGI=001-01-0000001 FAKE signal dominant rsrp=-71.3dBm
+[10:18:23.911] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=135 pos=(236.2,784.4) servECGI=001-01-0000006 rsrp=-59.8dBm ta=5 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=136 ECGI=001-01-0000001 FAKE signal dominant rsrp=-80.3dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=136 pos=(1913.8,957.0) servECGI=001-01-0000015 rsrp=-46.1dBm ta=1 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=137 ECGI=001-01-0000001 FAKE signal dominant rsrp=-27.6dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=137 fake BS is serving (ECGI=001-01-0000001) rsrp=-27.6dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=138 ECGI=001-01-0000001 FAKE signal dominant rsrp=-84.8dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=138 pos=(-207.1,1966.4) servECGI=001-01-0000021 rsrp=-49.6dBm ta=3 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=139 ECGI=001-01-0000001 FAKE signal dominant rsrp=-99.3dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=139 pos=(1604.4,1982.5) servECGI=001-01-0000024 rsrp=-43.4dBm ta=1 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=140 ECGI=001-01-0000001 FAKE signal dominant rsrp=-82.1dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=140 pos=(1321.3,376.3) servECGI=001-01-0000009 rsrp=-54.2dBm ta=3 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=141 ECGI=001-01-0000001 FAKE signal dominant rsrp=-88.0dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=141 pos=(1872.7,1182.8) servECGI=001-01-0000020 rsrp=-54.1dBm ta=4 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=142 ECGI=001-01-0000001 FAKE signal dominant rsrp=-74.5dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=142 pos=(2027.2,1034.3) servECGI=001-01-0000015 rsrp=-31.2dBm ta=1 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=143 ECGI=001-01-0000001 FAKE signal dominant rsrp=-91.0dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=143 pos=(2204.8,1311.3) servECGI=001-01-0000015 rsrp=-66.1dBm ta=5 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=144 ECGI=001-01-0000001 FAKE signal dominant rsrp=-38.7dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=144 fake BS is serving (ECGI=001-01-0000001) rsrp=-38.7dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=145 ECGI=001-01-0000001 FAKE signal dominant rsrp=-88.4dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=145 pos=(1946.9,2229.1) servECGI=001-01-0000025 rsrp=-56.2dBm ta=3 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=146 ECGI=001-01-0000001 FAKE signal dominant rsrp=-84.7dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=146 pos=(-214.4,1577.7) servECGI=001-01-0000016 rsrp=-51.5dBm ta=3 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=147 pos=(536.7,355.2) servECGI=001-01-0000007 rsrp=-23.9dBm ta=2 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=148 ECGI=001-01-0000001 FAKE signal dominant rsrp=-61.3dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=148 fake BS is serving (ECGI=001-01-0000001) rsrp=-61.3dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=149 ECGI=001-01-0000001 FAKE signal dominant rsrp=-83.1dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=149 pos=(1220.1,2229.7) servECGI=001-01-0000023 rsrp=-64.5dBm ta=4 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=150 ECGI=001-01-0000001 FAKE signal dominant rsrp=-77.4dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=150 pos=(381.0,2107.8) servECGI=001-01-0000022 rsrp=-52.8dBm ta=2 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=151 ECGI=001-01-0000001 FAKE signal dominant rsrp=-92.7dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=151 pos=(2208.0,504.5) servECGI=001-01-0000015 rsrp=-53.6dBm ta=7 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=152 ECGI=001-01-0000001 FAKE signal dominant rsrp=-73.8dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=152 pos=(1932.7,1815.1) servECGI=001-01-0000025 rsrp=-46.6dBm ta=3 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=153 ECGI=001-01-0000001 FAKE signal dominant rsrp=-79.8dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=153 pos=(1561.5,1666.4) servECGI=001-01-0000019 rsrp=-57.3dBm ta=2 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=154 pos=(447.5,2117.3) servECGI=001-01-0000022 rsrp=-36.7dBm ta=2 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=155 ECGI=001-01-0000001 FAKE signal dominant rsrp=-79.0dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=155 pos=(300.9,677.6) servECGI=001-01-0000007 rsrp=-57.0dBm ta=3 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=156 ECGI=001-01-0000001 FAKE signal dominant rsrp=-67.9dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=156 pos=(19.7,877.5) servECGI=001-01-0000011 rsrp=-52.8dBm ta=2 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=157 ECGI=001-01-0000001 FAKE signal dominant rsrp=-82.4dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=157 pos=(1600.0,93.4) servECGI=001-01-0000004 rsrp=-39.6dBm ta=2 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=158 ECGI=001-01-0000001 FAKE signal dominant rsrp=-91.1dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=158 pos=(1226.2,1427.7) servECGI=001-01-0000018 rsrp=-60.4dBm ta=3 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=159 pos=(1797.1,-110.0) servECGI=001-01-0000005 rsrp=-43.6dBm ta=3 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=160 pos=(1456.9,2217.1) servECGI=001-01-0000023 rsrp=-62.5dBm ta=6 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=161 ECGI=001-01-0000001 FAKE signal dominant rsrp=-81.8dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=161 pos=(23.8,2047.4) servECGI=001-01-0000021 rsrp=-30.4dBm ta=1 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=162 ECGI=001-01-0000001 FAKE signal dominant rsrp=-102.4dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=162 pos=(963.6,2195.4) servECGI=001-01-0000022 rsrp=-54.4dBm ta=6 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=163 ECGI=001-01-0000001 FAKE signal dominant rsrp=-77.8dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=163 pos=(1672.4,236.0) servECGI=001-01-0000004 rsrp=-56.7dBm ta=4 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=164 ECGI=001-01-0000001 FAKE signal dominant rsrp=-47.2dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=164 fake BS is serving (ECGI=001-01-0000001) rsrp=-47.2dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=165 ECGI=001-01-0000001 FAKE signal dominant rsrp=-68.3dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=165 pos=(1255.2,-23.9) servECGI=001-01-0000003 rsrp=-58.6dBm ta=3 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=166 ECGI=001-01-0000001 FAKE signal dominant rsrp=-88.2dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=166 pos=(2089.4,1262.5) servECGI=001-01-0000020 rsrp=-48.9dBm ta=3 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=167 ECGI=001-01-0000001 FAKE signal dominant rsrp=-85.6dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=167 pos=(1024.8,845.4) servECGI=001-01-0000013 rsrp=-55.4dBm ta=2 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=168 ECGI=001-01-0000001 FAKE signal dominant rsrp=-69.8dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=168 pos=(1023.3,987.2) servECGI=001-01-0000013 rsrp=-32.2dBm ta=0 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=169 ECGI=001-01-0000001 FAKE signal dominant rsrp=-82.8dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=169 pos=(1216.7,694.7) servECGI=001-01-0000008 rsrp=-67.6dBm ta=4 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=170 pos=(385.1,1482.9) servECGI=001-01-0000017 rsrp=-39.8dBm ta=2 ecgis=25
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=171 ECGI=001-01-0000001 FAKE signal dominant rsrp=-81.4dBm
+[10:18:23.912] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=171 pos=(2077.2,-36.2) servECGI=001-01-0000005 rsrp=-53.2dBm ta=1 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=172 ECGI=001-01-0000001 FAKE signal dominant rsrp=-55.2dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=172 pos=(224.1,288.4) servECGI=001-01-0000007 rsrp=-47.4dBm ta=4 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=173 ECGI=001-01-0000001 FAKE signal dominant rsrp=-76.1dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=173 pos=(1641.9,332.1) servECGI=001-01-0000009 rsrp=-56.7dBm ta=3 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=174 ECGI=001-01-0000001 FAKE signal dominant rsrp=-69.1dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=174 pos=(998.8,-4.6) servECGI=001-01-0000003 rsrp=-16.3dBm ta=0 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=175 ECGI=001-01-0000001 FAKE signal dominant rsrp=-71.6dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=175 pos=(905.2,969.1) servECGI=001-01-0000013 rsrp=-53.0dBm ta=1 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=176 pos=(2208.3,1000.9) servECGI=001-01-0000015 rsrp=-56.2dBm ta=3 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=177 ECGI=001-01-0000001 FAKE signal dominant rsrp=-73.5dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=177 pos=(-168.2,1175.0) servECGI=001-01-0000011 rsrp=-55.3dBm ta=3 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=178 ECGI=001-01-0000001 FAKE signal dominant rsrp=-86.2dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=178 pos=(1055.0,1628.3) servECGI=001-01-0000019 rsrp=-43.0dBm ta=6 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=179 ECGI=001-01-0000001 FAKE signal dominant rsrp=-74.6dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=179 pos=(2160.5,451.0) servECGI=001-01-0000010 rsrp=-63.8dBm ta=2 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=180 ECGI=001-01-0000001 FAKE signal dominant rsrp=-80.0dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=180 pos=(1003.2,1880.2) servECGI=001-01-0000018 rsrp=-58.9dBm ta=5 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=181 ECGI=001-01-0000001 FAKE signal dominant rsrp=-74.0dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=181 pos=(141.9,1980.3) servECGI=001-01-0000021 rsrp=-50.6dBm ta=2 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=182 ECGI=001-01-0000001 FAKE signal dominant rsrp=-81.6dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=182 pos=(108.0,1710.1) servECGI=001-01-0000016 rsrp=-48.8dBm ta=3 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=183 ECGI=001-01-0000001 FAKE signal dominant rsrp=-80.3dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=183 pos=(283.7,1458.0) servECGI=001-01-0000016 rsrp=-57.6dBm ta=4 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=184 ECGI=001-01-0000001 FAKE signal dominant rsrp=-75.0dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=184 pos=(1072.6,181.3) servECGI=001-01-0000003 rsrp=-57.1dBm ta=3 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=185 pos=(1302.0,1042.1) servECGI=001-01-0000014 rsrp=-57.8dBm ta=3 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=186 ECGI=001-01-0000001 FAKE signal dominant rsrp=-69.1dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=186 pos=(801.5,1260.1) servECGI=001-01-0000013 rsrp=-60.8dBm ta=4 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=187 ECGI=001-01-0000001 FAKE signal dominant rsrp=-90.2dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=187 pos=(1453.0,2142.7) servECGI=001-01-0000024 rsrp=-38.1dBm ta=2 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=188 ECGI=001-01-0000001 FAKE signal dominant rsrp=-77.5dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=188 pos=(1605.5,19.6) servECGI=001-01-0000004 rsrp=-43.1dBm ta=1 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=189 ECGI=001-01-0000001 FAKE signal dominant rsrp=-53.0dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=189 fake BS is serving (ECGI=001-01-0000001) rsrp=-53.0dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=190 ECGI=001-01-0000001 FAKE signal dominant rsrp=-46.2dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=190 fake BS is serving (ECGI=001-01-0000001) rsrp=-46.2dBm — recorded to fake_served_ues.csv, excluded from measurements.csv
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=191 ECGI=001-01-0000001 FAKE signal dominant rsrp=-82.8dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=191 pos=(1898.8,2126.7) servECGI=001-01-0000025 rsrp=-56.9dBm ta=2 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=192 pos=(941.1,1260.2) servECGI=001-01-0000018 rsrp=-47.2dBm ta=3 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=193 ECGI=001-01-0000001 FAKE signal dominant rsrp=-61.6dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=193 pos=(-128.6,437.5) servECGI=001-01-0000006 rsrp=-46.7dBm ta=2 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=194 ECGI=001-01-0000001 FAKE signal dominant rsrp=-75.5dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=194 pos=(1258.6,363.8) servECGI=001-01-0000009 rsrp=-56.9dBm ta=4 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=195 ECGI=001-01-0000001 FAKE signal dominant rsrp=-68.6dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=195 pos=(1243.6,-66.7) servECGI=001-01-0000004 rsrp=-61.5dBm ta=3 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=196 ECGI=001-01-0000001 FAKE signal dominant rsrp=-83.8dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=196 pos=(2111.9,2060.6) servECGI=001-01-0000025 rsrp=-46.9dBm ta=2 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=197 ECGI=001-01-0000001 FAKE signal dominant rsrp=-69.2dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=197 pos=(1050.6,690.9) servECGI=001-01-0000005 rsrp=-63.0dBm ta=15 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=198 ECGI=001-01-0000001 FAKE signal dominant rsrp=-77.1dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=198 pos=(1147.4,1191.8) servECGI=001-01-0000013 rsrp=-40.8dBm ta=3 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=199 ECGI=001-01-0000001 FAKE signal dominant rsrp=-52.0dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=199 pos=(466.0,468.6) servECGI=001-01-0000007 rsrp=-36.4dBm ta=1 ecgis=25
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=200 ECGI=001-01-0000001 FAKE signal dominant rsrp=-86.6dBm
+[10:18:23.913] [DEBUG] [sim=1.000s] [PeriodicMeas    ] t=1.00s IMSI=200 pos=(1853.4,2112.7) servECGI=001-01-0000025 rsrp=-50.3dBm ta=2 ecgis=25
+[10:18:23.913] [INFO ] [sim=1.000s] [PeriodicMeas    ] t=1.00s  UEs=200  totalSamples=186

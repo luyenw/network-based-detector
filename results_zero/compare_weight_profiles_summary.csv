@@ -1,0 +1,6 @@
+folder,recall_old,recall_new,auc_old,auc_new,mean_err_old,mean_err_new
+fbs-zero-step1,0.0,0.0,0.875,1.0,316.51425,218.34175
+fbs-zero-step2,0.0,1.0,1.0,1.0,317.49375,219.892
+fbs-zero-step3,1.0,1.0,1.0,1.0,316.8165,210.80100000000002
+fbs-zero-step4,1.0,1.0,1.0,1.0,315.14525,190.82649999999998
+fbs-zero-step5,1.0,1.0,1.0,1.0,320.083375,209.01350000000002

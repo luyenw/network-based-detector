@@ -1,0 +1,6 @@
+folder,recall_old,recall_new,auc_old,auc_new,mean_err_old,mean_err_new
+fbs-close2-step1,0.0,0.0,0.875,1.0,317.96575,224.90637500000003
+fbs-close2-step2,1.0,1.0,1.0,1.0,317.573375,219.523875
+fbs-close2-step3,1.0,1.0,1.0,1.0,316.7245,210.633875
+fbs-close2-step4,1.0,1.0,1.0,1.0,316.07737499999996,205.733
+fbs-close2-step5,1.0,1.0,1.0,1.0,318.355375,215.249625
