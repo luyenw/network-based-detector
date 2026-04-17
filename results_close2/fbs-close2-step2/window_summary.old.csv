@@ -1,0 +1,2 @@
+time_sec,num_measurements,avg_residual,num_cells,num_fake_cells,runtime_ms
+1.0,2000,582304.082676,25,1,1865.23
