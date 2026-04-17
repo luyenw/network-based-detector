@@ -97,7 +97,7 @@ services:
   # ── FBS cách LBS 200 m, chạy 5 step tăng công suất giả +5 dBm mỗi step ────
   # LBS giữ cố định 46 dBm ở toàn bộ các step.
   # Step powers (FBS): 46, 51, 56, 61, 66 dBm
-  sim-fbs-close2-step1:
+  sim-fbs-medium-step1:
     <<: *sim-base
     command:
       - "--gridSize=5"
@@ -105,8 +105,10 @@ services:
       - "--simTime=60"
       - "--detectorInterval=1.0"
       - "--fakeEci=1"
-      - "--fbsDistFromLbs=200"
-      - "--fbsAngleDeg=45"
+      # - "--fbsDistFromLbs=200"
+      - "--fakePosX=353.5"
+      - "--fakePosY=353.5"
+      # - "--fbsAngleDeg=45"
       - "--txPower=46"
       - "--fakeTxPower=46"
       - "--bandwidth=25"
@@ -114,9 +116,10 @@ services:
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
-      - "--outputDir=/output/fbs-close2-step1"
+      - "--maxMeasurementRows=2000"
+      - "--outputDir=/output/fbs-medium-step1"
 
-  sim-fbs-close2-step2:
+  sim-fbs-medium-step2:
     <<: *sim-base
     command:
       - "--gridSize=5"
@@ -124,8 +127,10 @@ services:
       - "--simTime=60"
       - "--detectorInterval=1.0"
       - "--fakeEci=1"
-      - "--fbsDistFromLbs=200"
-      - "--fbsAngleDeg=45"
+      # - "--fbsDistFromLbs=200"
+      - "--fakePosX=353.5"
+      - "--fakePosY=353.5"
+      # - "--fbsAngleDeg=45"
       - "--txPower=46"
       - "--fakeTxPower=51"
       - "--bandwidth=25"
@@ -133,9 +138,10 @@ services:
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
-      - "--outputDir=/output/fbs-close2-step2"
+      - "--maxMeasurementRows=2000"
+      - "--outputDir=/output/fbs-medium-step2"
 
-  sim-fbs-close2-step3:
+  sim-fbs-medium-step3:
     <<: *sim-base
     command:
       - "--gridSize=5"
@@ -143,8 +149,10 @@ services:
       - "--simTime=60"
       - "--detectorInterval=1.0"
       - "--fakeEci=1"
-      - "--fbsDistFromLbs=200"
-      - "--fbsAngleDeg=45"
+      # - "--fbsDistFromLbs=200"
+      - "--fakePosX=353.5"
+      - "--fakePosY=353.5"
+      # - "--fbsAngleDeg=45"
       - "--txPower=46"
       - "--fakeTxPower=56"
       - "--bandwidth=25"
@@ -152,9 +160,10 @@ services:
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
-      - "--outputDir=/output/fbs-close2-step3"
+      - "--maxMeasurementRows=2000"
+      - "--outputDir=/output/fbs-medium-step3"
 
-  sim-fbs-close2-step4:
+  sim-fbs-medium-step4:
     <<: *sim-base
     command:
       - "--gridSize=5"
@@ -162,8 +171,10 @@ services:
       - "--simTime=60"
       - "--detectorInterval=1.0"
       - "--fakeEci=1"
-      - "--fbsDistFromLbs=200"
-      - "--fbsAngleDeg=45"
+      # - "--fbsDistFromLbs=200"
+      - "--fakePosX=353.5"
+      - "--fakePosY=353.5"
+      # - "--fbsAngleDeg=45"
       - "--txPower=46"
       - "--fakeTxPower=61"
       - "--bandwidth=25"
@@ -171,9 +182,10 @@ services:
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
-      - "--outputDir=/output/fbs-close2-step4"
+      - "--maxMeasurementRows=2000"
+      - "--outputDir=/output/fbs-medium-step4"
 
-  sim-fbs-close2-step5:
+  sim-fbs-medium-step5:
     <<: *sim-base
     command:
       - "--gridSize=5"
@@ -181,8 +193,10 @@ services:
       - "--simTime=60"
       - "--detectorInterval=1.0"
       - "--fakeEci=1"
-      - "--fbsDistFromLbs=200"
-      - "--fbsAngleDeg=45"
+      # - "--fbsDistFromLbs=200"
+      - "--fakePosX=353.5"
+      - "--fakePosY=353.5"
+      # - "--fbsAngleDeg=45"
       - "--txPower=46"
       - "--fakeTxPower=66"
       - "--bandwidth=25"
@@ -190,7 +204,8 @@ services:
       - "--shadowingStd=8.0"
       - "--shadowingSeed=42"
       - "--maxReportCells=0"
-      - "--outputDir=/output/fbs-close2-step5"
+      - "--maxMeasurementRows=2000"
+      - "--outputDir=/output/fbs-medium-step5"
 
 
   # # ── FBS medium distance: (353.5, 353.5)  dist ≈ 500 m ─────────────────────
