@@ -365,6 +365,7 @@ def process_ue(
     theta_snr: float = -20.0,
     sigma_var: float = 6.0,
     delta_ta: float = 180.0,
+    use_known_ue_pos: bool = False,
 ) -> tuple:
     # §4 — mean RSRP per ECGI
     r_c = ue_meas.groupby("ecgi")["rsrp_dbm"].mean()
@@ -400,17 +401,31 @@ def process_ue(
         sigma_var=sigma_var,
         delta_ta=delta_ta,
     )
-
-    # §6 — multi-start optimiser for u*
-    u_star, R_star, r_hat_tilde_star = _estimate_ue_pos(
-        r_tilde, mu, sigma, cell_pos, cell_h, tx_powers,
-        dist_rsrp=dist_rsrp,
-        weight_rsrp=weight_rsrp,
-        dist_ta=dist_ta,
-        weight_ta=weight_ta,
-        n_starts=n_starts, rng=rng,
-        lambda_ta=lambda_ta,
-    )
+    
+    # §6 — multi-start optimiser for u* (or bypass if known position)
+    if use_known_ue_pos:
+        ue_x = float(ue_meas["ue_x"].iloc[0])
+        ue_y = float(ue_meas["ue_y"].iloc[0])
+        ue_z = float(ue_meas.get("ue_z", pd.Series([2.0])).iloc[0])
+        u_star = np.array([ue_x, ue_y, ue_z])
+        R_star = 0.0
+        
+        ue_z_fixed = 2.0
+        dist_star_tmp = np.sqrt((u_star[0] - cell_pos[:, 0]) ** 2 +
+                                (u_star[1] - cell_pos[:, 1]) ** 2 +
+                                (ue_z_fixed - cell_h) ** 2)
+        r_hat_star_tmp = tx_powers - _pl(np.maximum(dist_star_tmp, 1.0))
+        r_hat_tilde_star = (r_hat_star_tmp - mu) / sigma
+    else:
+        u_star, R_star, r_hat_tilde_star = _estimate_ue_pos(
+            r_tilde, mu, sigma, cell_pos, cell_h, tx_powers,
+            dist_rsrp=dist_rsrp,
+            weight_rsrp=weight_rsrp,
+            dist_ta=dist_ta,
+            weight_ta=weight_ta,
+            n_starts=n_starts, rng=rng,
+            lambda_ta=lambda_ta,
+        )
 
     # Note: process_ue now also needs ground truth to calculate errors later, but we calculate
     # error within the main loop to keep the function signatures unchanged where possible.
@@ -418,23 +433,16 @@ def process_ue(
     # §7 — per-cell error
     # e_c        = np.abs(r_tilde - r_hat_tilde_star)
     
-    # --- CẢI THIỆN THUẬT TOÁN CỐT LÕI (ABSOLUTE POWER PENALTY) ---
-    # Thay vì chỉ dùng sai số hình học (dễ bị che giấu khi chuẩn hóa r_tilde nếu FBS phát công suất cực lớn),
-    # ta tính thêm hình phạt (penalty) dựa trên sự chênh lệch tuyệt đối của công suất thu (RSRP).
-    ue_z_fixed = 2.0
-    dist_star = np.sqrt((u_star[0] - cell_pos[:, 0]) ** 2 +
-                        (u_star[1] - cell_pos[:, 1]) ** 2 +
-                        (ue_z_fixed - cell_h) ** 2)
-    r_hat_star = tx_powers - _pl(np.maximum(dist_star, 1.0))
-    
-    # Tính phần công suất dư thừa (dB) - chỉ phạt khi RSRP thực tế lớn hơn lý thuyết
-    power_excess = np.maximum(0, r_c.values - r_hat_star)
-    
-    # Chuẩn hóa hình phạt (chia cho 10.0 dB tương đương 1 độ lệch chuẩn shadow fading)
-    power_penalty = power_excess / 10.0
-    
-    e_c = np.abs(r_tilde - r_hat_tilde_star) + power_penalty
-    # -------------------------------------------------------------
+    # --- OLD FORMULA: chỉ dùng TA + RSRP, không dùng power penalty ---
+    # ue_z_fixed = 2.0
+    # dist_star = np.sqrt((u_star[0] - cell_pos[:, 0]) ** 2 +
+    #                     (u_star[1] - cell_pos[:, 1]) ** 2 +
+    #                     (ue_z_fixed - cell_h) ** 2)
+    # r_hat_star = tx_powers - _pl(np.maximum(dist_star, 1.0))
+    # power_excess = np.maximum(0, r_c.values - r_hat_star)
+    # power_penalty = power_excess / 10.0
+    e_c = np.abs(r_tilde - r_hat_tilde_star)
+    # -----------------------------------------------------------------
         
     e_dict     = dict(zip(ecgis, e_c.tolist()))
     cellid_dict = {ecgi: ecgi_to_cellid.get(ecgi, -1) for ecgi in ecgis}
@@ -616,6 +624,9 @@ def _collect_bayesian_ue_data(
         records.append({
             "imsi":          int(imsi),
             "u_pos":         (float(u_pos[0]), float(u_pos[1]), float(u_pos[2])),
+            "ue_x":          float(fake_rows["ue_x"].iloc[0]),
+            "ue_y":          float(fake_rows["ue_y"].iloc[0]),
+            "ue_z":          float(fake_rows.get("ue_z", pd.Series([2.0])).iloc[0]),
             "fake_rsrp":     fake_rsrp,
             "anomaly_weight": w_i,
         })
@@ -655,6 +666,7 @@ def _process_window_task(
     k_sigma:      float,
     sigma_total:  float,
     window_idx:   int,   # used as RNG seed → deterministic + independent per window
+    use_known_ue_pos: bool = False,
 ) -> dict:
     """
     Process one time window T independently.
@@ -679,6 +691,7 @@ def _process_window_task(
             n_starts=n_ue_starts, rng=rng, lambda_ta=lambda_ta,
             sigma_rsrq=sigma_rsrq, theta_snr=theta_snr,
             sigma_var=sigma_var, delta_ta=delta_ta,
+            use_known_ue_pos=use_known_ue_pos,
         )
         if e_dict is None:
             continue
@@ -715,6 +728,9 @@ def _process_window_task(
                 "estimated_ue_x": round(float(u_star[0]), 2),
                 "estimated_ue_y": round(float(u_star[1]), 2),
                 "estimated_ue_z": round(float(u_star[2]), 2),
+                "ue_x":           round(float(mr["ue_x"]), 2),
+                "ue_y":           round(float(mr["ue_y"]), 2),
+                "ue_z":           round(float(mr.get("ue_z", 2.0)), 2),
                 "ecgi":           mr["ecgi"],
                 "cell_role":      mr["cell_role"],
                 "rsrp_dbm":       round(float(mr["rsrp_dbm"]), 3),
@@ -742,6 +758,9 @@ def _process_window_task(
                 "estimated_ue_x":   round(rec["u_pos"][0], 2),
                 "estimated_ue_y":   round(rec["u_pos"][1], 2),
                 "estimated_ue_z":   round(rec["u_pos"][2], 2),
+                "ue_x":             round(rec["ue_x"], 2),
+                "ue_y":             round(rec["ue_y"], 2),
+                "ue_z":             round(rec["ue_z"], 2),
                 "rsrp_observed":    round(rec["fake_rsrp"], 3),
                 "ecgi":             ecgi_f,
                 "anomaly_score_wi": round(rec["anomaly_weight"], 6),
@@ -793,6 +812,7 @@ def run_detection(
     sigma_var:    float = 6.0,
     delta_ta:     float = 150.0,
     n_workers:    int   = 0,       # 0 = use os.cpu_count()
+    use_known_ue_pos: bool = False,
 ) -> None:
     """
     Stage 1 — Fake cell detection.
@@ -886,7 +906,7 @@ def run_detection(
                 T, M_T, legal, ecgi_gt_fake,
                 min_cells, n_ue_starts, lambda_ta,
                 sigma_rsrq, theta_snr, sigma_var, delta_ta,
-                method, k_sigma, sigma_total, k,
+                method, k_sigma, sigma_total, k, use_known_ue_pos,
             ): (k, T)
             for k, T, M_T in window_slices
         }
@@ -988,6 +1008,7 @@ def run_detection(
         pd.DataFrame(loc_input_rows)[
             ["time_sec", "imsi",
              "estimated_ue_x", "estimated_ue_y", "estimated_ue_z",
+             "ue_x", "ue_y", "ue_z",
              "ecgi", "cell_role", "rsrp_dbm", "timing_advance"]
         ].sort_values(["time_sec", "imsi"]).to_csv(loc_input_path, index=False)
         log.info("localization_input.csv → %s  (%d rows)",
@@ -1012,6 +1033,7 @@ def run_detection(
         pd.DataFrame(detection_log_rows)[
             ["timestamp", "ue_id",
              "estimated_ue_x", "estimated_ue_y", "estimated_ue_z",
+             "ue_x", "ue_y", "ue_z",
              "rsrp_observed", "ecgi", "anomaly_score_wi"]
         ].to_csv(det_log_path, index=False)
         log.info(
@@ -1095,6 +1117,10 @@ if __name__ == "__main__":
         "--sigma-total", type=float, default=9.1,
         help="σ_total [dB] for anomaly weight w_i in detection_log (default: 9.1)",
     )
+    ap.add_argument(
+        "--use-known-ue-pos", action="store_true",
+        help="Bypass UE position estimation and use ground truth UE position",
+    )
     args = ap.parse_args()
 
     profile = WEIGHT_PROFILES[args.weight_profile]
@@ -1127,4 +1153,5 @@ if __name__ == "__main__":
         sigma_var=sigma_var,
         delta_ta=args.delta_ta,
         n_workers=args.n_workers,
+        use_known_ue_pos=args.use_known_ue_pos,
     )
